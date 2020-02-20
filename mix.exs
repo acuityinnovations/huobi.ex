@@ -21,7 +21,7 @@ defmodule ExHuobi.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.4"},
+      {:httpoison, "~> 1.6"},
       {:poison, "~> 3.1"},
       {:jason, "~> 1.1.0"},
       {:mapail, "~> 1.0.2"},

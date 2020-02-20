@@ -18,7 +18,7 @@ defmodule ExHuobi.Config do
   def get(nil) do
     %__MODULE__{
       api_key: System.get_env("HUOBI_API_KEY"),
-      api_secret: System.get_env("HUOBI_SECRET")
+      api_secret: System.get_env("HUOBI_API_SECRET")
     }
   end
 

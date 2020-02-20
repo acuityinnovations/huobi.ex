@@ -1,9 +1,10 @@
 defmodule ExHuobi.Margin.Rest.Order do
-  alias ExHuobi.Margin.Rest.HTTPClient
+  alias ExHuobi.Rest.HTTPClient
 
+  @margin_endpoint "https://api.huobi.pro"
 
   def get_order(order_id, config \\ nil) do
-    case HTTPClient.get_huobi("/v1/order/orders/#{order_id}", config) do
+    case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
@@ -18,7 +19,7 @@ defmodule ExHuobi.Margin.Rest.Order do
           params,
         config \\ nil
       ) do
-    case HTTPClient.post_huobi("/v1/order/orders/place", params, config) do
+    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config) do
       {:ok, data} ->
         {:ok, %ExHuobi.Margin.Order{id: data}}
 
@@ -30,7 +31,7 @@ defmodule ExHuobi.Margin.Rest.Order do
   # ExHuobi.Margin.Rest.Order.get_open_orders(%{"account-id": 12035991, symbol: "btcusdt"})
 
   def get_open_orders(%{"account-id": _account_id, symbol: _symbol} = params, config \\ nil) do
-    case HTTPClient.get_huobi("/v1/order/openOrders", params, config) do
+    case HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
@@ -42,7 +43,7 @@ defmodule ExHuobi.Margin.Rest.Order do
 
   # ExHuobi.Margin.Rest.Order.cancel_order(70469904946)
   def cancel_order(order_id, config \\ nil) do
-    case HTTPClient.post_huobi("/v1/order/orders/#{order_id}/submitcancel", "", config) do
+    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/#{order_id}/submitcancel", "", config) do
       {:ok, data} ->
         {:ok, %ExHuobi.Margin.Order{id: data}}
 
