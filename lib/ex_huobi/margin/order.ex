@@ -1,5 +1,4 @@
-defmodule ExHuobi.Spot.Order do
-
+defmodule ExHuobi.Margin.Order do
   defstruct ~w(
     id
     symbol
@@ -17,5 +16,4 @@ defmodule ExHuobi.Spot.Order do
     state
     canceled-at
   )a
-
 end

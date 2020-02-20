@@ -1,10 +1,9 @@
-defmodule ExHuobi.Spot.Rest.Account do
-  alias ExHuobi.Spot.Rest.HTTPClient
+defmodule ExHuobi.Margin.Rest.Account do
+  alias ExHuobi.Margin.Rest.HTTPClient
 
-  def get_account(config \\ nil) do
+  def get_account(config) do
     case HTTPClient.get_huobi("/v1/account/accounts", config) do
       {:ok, data} ->
-        IO.inspect data
         {:ok, account} = data |> parse_to_obj()
 
       error ->
@@ -29,7 +28,7 @@ defmodule ExHuobi.Spot.Rest.Account do
   defp to_struct(data) do
     data
     |> Mapail.map_to_struct(
-      ExHuobi.Spot.Account,
+      ExHuobi.Margin.Account,
       transformations: [:snake_case]
     )
   end

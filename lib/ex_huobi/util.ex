@@ -13,12 +13,13 @@ defmodule ExHuobi.Util do
     |> Base.encode64()
   end
 
-
   def get_timestamp do
-    {timestamp, _} = DateTime.utc_now
-                     |> DateTime.truncate(:second)
-                     |> DateTime.to_iso8601()
-                     |> String.split_at(-1)
+    {timestamp, _} =
+      DateTime.utc_now()
+      |> DateTime.truncate(:second)
+      |> DateTime.to_iso8601()
+      |> String.split_at(-1)
+
     timestamp
   end
 end
