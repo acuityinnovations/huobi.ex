@@ -1,6 +1,4 @@
 defmodule ExHuobi.Rest.HTTPClient do
-  @base_url "https://api.huobi.pro"
-
   alias ExHuobi.{Config, Util}
 
   def get(base_url, path, config) do
@@ -31,14 +29,14 @@ defmodule ExHuobi.Rest.HTTPClient do
         error
 
       {:ok, signed_url} ->
-        HTTPoison.post(signed_url, Jason.encode!(params), headers)
+        HTTPoison.post(signed_url, Jason.encode!(params), headers())
         |> parse_response
     end
   end
 
   defp headers, do: ["Content-Type": "application/json"]
 
-  defp prepare_request(method, base_url, path, config) do
+  def prepare_request(method, base_url, path, config) do
     case validate_credentials(config) do
       {:error, _} = error ->
         {:error, error}
@@ -68,7 +66,7 @@ defmodule ExHuobi.Rest.HTTPClient do
     end
   end
 
-  defp prepare_request(method, base_url, path, params, config) do
+  def prepare_request(method, base_url, path, params, config) do
     case validate_credentials(config) do
       {:error, _} = error ->
         {:error, error}
@@ -140,8 +138,6 @@ defmodule ExHuobi.Rest.HTTPClient do
     end
   end
 end
-
-
 
 # defmodule ExHuobi.Http.Client do
 #   import ExHuobi.Config

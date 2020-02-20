@@ -40,10 +40,14 @@ defmodule ExHuobi.Margin.Rest.Order do
     end
   end
 
-
   # ExHuobi.Margin.Rest.Order.cancel_order(70469904946)
   def cancel_order(order_id, config \\ nil) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/#{order_id}/submitcancel", "", config) do
+    case HTTPClient.post(
+           @margin_endpoint,
+           "/v1/order/orders/#{order_id}/submitcancel",
+           "",
+           config
+         ) do
       {:ok, data} ->
         {:ok, %ExHuobi.Margin.Order{id: data}}
 

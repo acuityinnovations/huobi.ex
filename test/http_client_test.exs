@@ -1,10 +1,11 @@
 defmodule ExHuobi.Rest.HTTPClientTest do
   use ExUnit.Case
+  alias ExHuobi.Util
   doctest ExHuobi.Rest.HTTPClient
 
   describe "test helper functions in http client" do
     test "timestamp should return correct format" do
-      timestamp = ExHuobi.Rest.HTTPClient.timestamp()
+      timestamp = Util.get_timestamp()
       [date, time] = String.split(timestamp, "T")
       [year, month, date] = String.split(date, "-")
       [hour, minute, second] = String.split(time, ":")
@@ -19,15 +20,21 @@ defmodule ExHuobi.Rest.HTTPClientTest do
     end
 
     test "should return correct signed_path" do
-      signed_path =
-        ExHuobi.Rest.HTTPClient.signed_path("GET", "api.hbdm.com", "/api/v1/contract_order", %{
-          "key1" => "value1",
-          "key2" => "value2"
-        })
+      {:ok, signed_path} =
+        ExHuobi.Rest.HTTPClient.prepare_request(
+          "GET",
+          "https://api.hbdm.com",
+          "/api/v1/contract_order",
+          %{
+            "key1" => "value1",
+            "key2" => "value2"
+          },
+          nil
+        )
 
-        [first, second] = String.split(signed_path, "?") |>IO.inspect
-        assert String.starts_with?("https://api.hbdm.com") == true
-        assert String.ends_with?("/api/v1/contract_order") == true
+      [first, second] = String.split(signed_path, "?")
+      assert String.starts_with?(first, "https://api.hbdm.com") == true
+      assert String.ends_with?(first, "/api/v1/contract_order") == true
     end
   end
 end
