@@ -7,7 +7,7 @@ defmodule Huobi.Test do
       |> String.split_at(-1)
 
     timestamp
-    |> URI.encode_www_form()
+    # |> URI.encode_www_form()
   end
 
   # def sign(method, host, path, params) do
@@ -24,7 +24,7 @@ defmodule Huobi.Test do
       "Timestamp" => timestamp()
     }
 
-    params_string = query_string("", params) |> IO.inspect()
+    params_string = URI.encode_query(params) |> IO.inspect()
 
     presigned_text = method <> host <> path <> params_string
 
@@ -60,8 +60,8 @@ defmodule Huobi.Test do
     # end
   end
 
-  def cancel(orderId) do
-    query_string = "POST\n"
+  def cancel() do
+    method = "POST\n"
     host = "api.hbdm.com\n"
     path = "/api/v1/contract_cancel\n"
 
@@ -72,9 +72,9 @@ defmodule Huobi.Test do
       "Timestamp" => timestamp()
     }
 
-    params_string = query_string("", params) |> IO.inspect()
+    params_string = URI.encode_query(params) |> IO.inspect()
 
-    presigned_text = query_string <> host <> path <> params_string
+    presigned_text = method <> host <> path <> params_string
 
     signature =
       :sha256
@@ -89,14 +89,14 @@ defmodule Huobi.Test do
 
     body = %{
       symbol: "BTC",
-      order_id: orderId
+      order_id: 680105018182868992
     }
 
     HTTPoison.post!(endpoint, Jason.encode!(body), %{"content-type" => "application/json"})
   end
 
   def get_position do
-    query_string = "POST\n"
+    method = "POST\n"
     host = "api.hbdm.com\n"
     path = "/api/v1/contract_position_info\n"
 
@@ -109,7 +109,7 @@ defmodule Huobi.Test do
 
     params_string = query_string("", params) |> IO.inspect()
 
-    presigned_text = query_string <> host <> path <> params_string
+    presigned_text = method <> host <> path <> params_string
 
     signature =
       :sha256
@@ -135,5 +135,11 @@ defmodule Huobi.Test do
       |> Enum.join("&")
 
     # path <> "?" <> query
+  end
+
+
+  def test_cancel() do
+    order = %{"order_id" => "680106166341476352", "symbol" => "BTC"}
+    ExHuobi.Futures.Private.cancel_order(order)
   end
 end

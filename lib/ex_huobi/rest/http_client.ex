@@ -7,22 +7,23 @@ defmodule Huobi.Http.Client do
   
   def headers, do: ["Content-Type": "application/json"]
 
-  def get(host, path, params \\ []) do
+  def get(host, path, params \\ %{}) do
     url = signed_path("GET", host, path, params)
     url
-      |> HTTPoison.get(headers)
+      |> HTTPoison.get(headers())
       |> parse_response()
   end
 
   def post(host, path, body) do
-    url = signed_path("POST", host, path, [])
+    url = signed_path("POST", host, path, %{}) |> IO.inspect
 
     url
-      |> HTTPoison.post(Jason.encode!(body))
-      |> parse_response()
-      def timestamp() do
+      |> HTTPoison.post(Jason.encode!(body), headers())
+      |> IO.inspect
+      |> parse_response()      
   end
 
+  def timestamp() do
     {timestamp, _} =
       DateTime.utc_now()
       |> DateTime.truncate(:second)
@@ -30,33 +31,33 @@ defmodule Huobi.Http.Client do
       |> String.split_at(-1)
 
     timestamp
-      |> URI.encode_www_form()
   end
 
   def signed_path(method, host, path, params) do
-    config = Config.config
 
-    access_key_id = ""
-    access_key_secret = ""
+    %Huobi.Config{api_key: api_key, api_secret: api_secret} = Huobi.Config.get(nil)
 
+    api_key = "3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14"
+    api_secret = "94472b76-30a703ac-e75d7396-c34a0"
 
     default_params = %{
-      "AccessKeyId" => access_key_id,
+      "AccessKeyId" => api_key,
       "SignatureMethod" => "HmacSHA256",
       "SignatureVersion" => 2,
       "Timestamp" => timestamp()
-    }
-    params = default_params ++ params
+    } |> IO.inspect
+    params = Map.merge(default_params, params)
 
     params_string = URI.encode_query(params)
     
     presigned_text = [method, host, path, params_string] |> Enum.join("\n")
     signature =
       :sha256
-      |> :crypto.hmac(access_key_secret, presigned_text)
+      |> :crypto.hmac(api_secret, presigned_text)
       |> Base.encode64()
 
-    request_url = "https://#{host}#{path}?#{params_string}&Signature=#{signature}"
+    request_url = "https://#{host}#{path}?#{params_string}&Signature=#{signature}" 
+      |> IO.inspect
   end
 
   def parse_response(response) do
