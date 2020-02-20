@@ -1,4 +1,4 @@
-defmodule Huobi.Api.Private do
+defmodule Huobi.Http.Client do
 
   import Huobi.Config
   
