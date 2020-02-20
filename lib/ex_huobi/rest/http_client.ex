@@ -7,7 +7,7 @@ defmodule Huobi.Http.Client do
   
   def headers, do: ["Content-Type": "application/json"]
 
-  def get(host, path, params) do
+  def get(host, path, params \\ []) do
     url = signed_path("GET", host, path, params)
     url
       |> HTTPoison.get(headers)
@@ -49,13 +49,14 @@ defmodule Huobi.Http.Client do
     params = default_params ++ params
 
     params_string = URI.encode_query(params)
-    presigned_text = method <> host <> path <> params_string
+    
+    presigned_text = [method, host, path, params_string] |> Enum.join("\n")
     signature =
       :sha256
       |> :crypto.hmac(access_key_secret, presigned_text)
       |> Base.encode64()
 
-    request_url = "https://#{request_url}?#{params_string}&Signature=#{signature}"
+    request_url = "https://#{host}#{path}?#{params_string}&Signature=#{signature}"
   end
 
   def parse_response(response) do

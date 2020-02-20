@@ -18,8 +18,5 @@ defmodule ExHuobi.Futures.Private do
   def get_position(instrument_id) do
     post(host, "api/v1/contract_position_info", Jason.encode!(instrument_id))
   end
-
-
-
-
+  
 end
