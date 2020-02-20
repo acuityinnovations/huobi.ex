@@ -1,13 +1,12 @@
 defmodule Huobi.Test do
   def timestamp() do
     {timestamp, _} =
-      DateTime.utc_now()
-      |> DateTime.truncate(:second)
-      |> DateTime.to_iso8601()
-      |> String.split_at(-1)
+      DateTime.utc_now() |> IO.inspect
+      |> DateTime.truncate(:second) |> IO.inspect
+      |> DateTime.to_iso8601() |> IO.inspect
+      |> String.split_at(-1) |> IO.inspect
 
-    timestamp
-    # |> URI.encode_www_form()
+    timestamp  
   end
 
   # def sign(method, host, path, params) do
