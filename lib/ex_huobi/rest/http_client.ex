@@ -1,26 +1,25 @@
-defmodule Huobi.Http.Client do
+defmodule ExHuobi.Http.Client do
+  import ExHuobi.Config
 
-  import Huobi.Config
-  
   # @hbdm_url "https://api.hbdm.com"
   # @hbdm_host "api.hbdm.com"
-  
+
   def headers, do: ["Content-Type": "application/json"]
 
   def get(host, path, params \\ %{}) do
     url = signed_path("GET", host, path, params)
+
     url
-      |> HTTPoison.get(headers())
-      |> parse_response()
+    |> HTTPoison.get(headers())
+    |> parse_response()
   end
 
   def post(host, path, body) do
-    url = signed_path("POST", host, path, %{}) |> IO.inspect
+    url = signed_path("POST", host, path, %{})
 
     url
-      |> HTTPoison.post(Jason.encode!(body), headers())
-      |> IO.inspect
-      |> parse_response()      
+    |> HTTPoison.post(Jason.encode!(body), headers())
+    |> parse_response()
   end
 
   def timestamp() do
@@ -34,8 +33,7 @@ defmodule Huobi.Http.Client do
   end
 
   def signed_path(method, host, path, params) do
-
-    %Huobi.Config{api_key: api_key, api_secret: api_secret} = Huobi.Config.get(nil)
+    %ExHuobi.Config{api_key: api_key, api_secret: api_secret} = ExHuobi.Config.get(nil)
 
     api_key = "3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14"
     api_secret = "94472b76-30a703ac-e75d7396-c34a0"
@@ -45,19 +43,20 @@ defmodule Huobi.Http.Client do
       "SignatureMethod" => "HmacSHA256",
       "SignatureVersion" => 2,
       "Timestamp" => timestamp()
-    } |> IO.inspect
+    }
+
     params = Map.merge(default_params, params)
 
     params_string = URI.encode_query(params)
-    
+
     presigned_text = [method, host, path, params_string] |> Enum.join("\n")
+
     signature =
       :sha256
       |> :crypto.hmac(api_secret, presigned_text)
       |> Base.encode64()
 
-    request_url = "https://#{host}#{path}?#{params_string}&Signature=#{signature}" 
-      |> IO.inspect
+    request_url = "https://#{host}#{path}?#{params_string}&Signature=#{signature}"
   end
 
   def parse_response(response) do

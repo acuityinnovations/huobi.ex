@@ -89,7 +89,7 @@ defmodule Huobi.Test do
 
     body = %{
       symbol: "BTC",
-      order_id: 680105018182868992
+      order_id: 680_105_018_182_868_992
     }
 
     HTTPoison.post!(endpoint, Jason.encode!(body), %{"content-type" => "application/json"})
@@ -136,7 +136,6 @@ defmodule Huobi.Test do
 
     # path <> "?" <> query
   end
-
 
   def test_cancel() do
     order = %{"order_id" => "680106166341476352", "symbol" => "BTC"}

@@ -1,7 +1,7 @@
-defmodule Huobi.Config do
+defmodule ExHuobi.Config do
   require Logger
 
-  @type t :: %Huobi.Config{
+  @type t :: %ExHuobi.Config{
           api_key: String.t(),
           api_secret: String.t()
         }

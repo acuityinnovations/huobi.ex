@@ -1,5 +1,5 @@
 defmodule ExHuobi.Futures.Private do
-  import Huobi.Http.Client
+  import ExHuobi.Http.Client
 
   @hbdm_host "api.hbdm.com"
 
@@ -16,7 +16,6 @@ defmodule ExHuobi.Futures.Private do
   end
 
   def get_position(instrument_id) do
-    post(@hbdm_host, "/api/v1/contract_position_info", instrument_id)
+    post(@hbdm_host, "/api/v1/contract_position_info", %{"symbol" => instrument_id})
   end
-
 end
