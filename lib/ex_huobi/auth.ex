@@ -13,7 +13,7 @@ defmodule Huobi.Test do
   # def sign(method, host, path, params) do
 
   def create() do
-    query_string = "POST\n"
+    method = "POST\n"
     host = "api.hbdm.com\n"
     path = "/api/v1/contract_order\n"
 
@@ -26,7 +26,7 @@ defmodule Huobi.Test do
 
     params_string = query_string("", params) |> IO.inspect()
 
-    presigned_text = query_string <> host <> path <> params_string
+    presigned_text = method <> host <> path <> params_string
 
     signature =
       :sha256

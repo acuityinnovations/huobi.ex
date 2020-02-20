@@ -1,50 +1,22 @@
 defmodule ExHuobi.Futures.Private do
-  @prefix "/api/v1"
+  import Huobi.Api.Private
 
-  # def create_order(param, config | nil) do
-  #   query_string = ""
+  @hbdm_url "https://api.hbdm.com"
 
-  #   query_string
-  #   |> url("https://api.huobi.pro")
-  #   |> HTTPoison.post(Jason.encode!(params))
-  #   |> parse_response()
-  # end
-
-  def create_batch_order(params, config \\ nil) do
+  def create_order(order) do
+    post(host, "/api/v1/contract_order", Jason.encode!(order))
   end
 
-  def cancel_order() do
+  def create_bulk_orders(orders) do
+    post(host, "/api/v1/contract_order", Jason.encode!(orders))
   end
 
-  def cancel_orders() do
+  def cancel_order(order) do
+    post(host, "/api/v1/contract_cancel", Jason.encode!(order))
   end
 
-  def get_position(instrument_id, config \\ nil) do
+  def get_position(instrument_id) do
+    post(host, "api/v1/contract_position_info", Jason.encode!(instrument_id))
   end
 
-  # def query_string(path, params) do
-  #   query =
-  #     params
-  #     |> Enum.map(fn {key, val} -> "#{key}=#{val}" end)
-  #     |> Enum.join("&")
-
-  #   path <> "?" <> query
-  # end
-
-  # def parse_response(response) do
-  #   case response do
-  #     {:ok, %HTTPoison.Response{body: body, status_code: status_code}} ->
-  #       if status_code in 200..299 do
-  #         {:ok, Jason.decode!(body)}
-  #       else
-  #         case Jason.decode(body) do
-  #           {:ok, json} -> {:error, {json["code"], json["message"]}, status_code}
-  #           {:error, _} -> {:error, body, status_code}
-  #         end
-  #       end
-
-  #     {:error, %HTTPoison.Error{reason: reason}} ->
-  #       {:error, reason}
-  #   end
-  # end
 end
