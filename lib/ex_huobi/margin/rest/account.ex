@@ -1,10 +1,12 @@
 defmodule ExHuobi.Margin.Rest.Account do
   alias ExHuobi.Margin.Rest.HTTPClient
 
+  @get_account_path "/v1/account/accounts"
+
   def get_account(config) do
-    case HTTPClient.get_huobi("/v1/account/accounts", config) do
+    case HTTPClient.get_huobi(@get_account_path, config) do
       {:ok, data} ->
-        {:ok, account} = data |> parse_to_obj()
+        {:ok, data |> parse_to_obj()}
 
       error ->
         error
