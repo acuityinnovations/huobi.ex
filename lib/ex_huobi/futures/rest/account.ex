@@ -1,5 +1,4 @@
 defmodule ExHuobi.Futures.Rest.Account do
-
   alias ExHuobi.Rest.HTTPClient
 
   @type params :: map
@@ -7,15 +6,6 @@ defmodule ExHuobi.Futures.Rest.Account do
 
   @hbdm_host "https://api.hbdm.com"
 
-  @doc """
-  Get user position in huobi exchange
-
-  https://huobiapi.github.io/docs/dm/v1/en/#user-s-position-information
-
-  ## Examples
-
-  iex> ExHuobi.Futures.Private.get_position("BTC")
-  """
   def get_position(instrument_id, config \\ nil) do
     HTTPClient.post(
       @hbdm_host,

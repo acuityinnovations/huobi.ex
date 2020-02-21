@@ -8,7 +8,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.get(signed_url)
-        |> parse_response
     end
   end
 
@@ -19,7 +18,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.get(signed_url)
-        |> parse_response
     end
   end
 
@@ -30,7 +28,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.post(signed_url, Jason.encode!(params), headers())
-        |> parse_response
     end
   end
 
@@ -107,34 +104,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       _ ->
         {:error, {:config_missing, "Secret or API key missing"}}
-    end
-  end
-
-  defp parse_response({:ok, %{status_code: status_code} = response})
-       when status_code not in 200..299 do
-    response.body
-    |> Poison.decode()
-    |> case do
-      {:ok, %{"status" => "error", "err-code" => err_code, "err-msg" => err_msg}} ->
-        {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
-
-      {:error, error} ->
-        {:error, {:poison_decode_error, error}}
-    end
-  end
-
-  defp parse_response({:ok, response}) do
-    response.body
-    |> Poison.decode()
-    |> case do
-      {:ok, %{"status" => "error", "err-code" => err_code, "err-msg" => err_msg}} ->
-        {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
-
-      {:ok, %{"status" => "ok", "data" => data}} ->
-        {:ok, data}
-
-      {:error, error} ->
-        {:error, {:poison_decode_error, error}}
     end
   end
 end
