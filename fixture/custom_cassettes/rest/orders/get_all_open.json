@@ -1,0 +1,24 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/order/openOrders)/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"filled-fees\":\"0.0\",\"source\":\"api\",\"symbol\":\"btcusdt\",\"filled-amount\":\"0.0\",\"filled-cash-amount\":\"0.0\",\"account-id\":12035991,\"price\":\"11000.000000000000000000\",\"client-order-id\":\"\",\"amount\":\"0.000100000000000000\",\"created-at\":1582266025313,\"id\":70646394808,\"state\":\"submitted\",\"type\":\"sell-limit\"}]}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "request": {
+      "body": "[
+        {\"account-id\":123456789,\"amount\":0.0001,\"price\":11000,\"source\":\"super-margin-api\",\"symbol\":\"btcusdt\",\"type\":\"sell-limit\"},
+        {\"account-id\":123456789,\"amount\":0.0001,\"price\":11500,\"source\":\"super-margin-api\",\"symbol\":\"btcusdt\",\"type\":\"sell-limit\"}
+      ]",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/order/batch-orders)/"
+    },
+    "response": {
+      "body": "{\"status\":\"ok\",\"data\":[{\"order-id\":70650642797},{\"order-id\":70650642799}]}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200,
+    }
+  }
+]

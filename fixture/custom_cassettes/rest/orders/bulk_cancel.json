@@ -1,0 +1,22 @@
+[
+  {
+    "request": {
+      "body": "{\"order-ids\": [70664141188, 70664141185]}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/order/orders/batchcancel)/"
+    },
+    "response": {
+      "body": "{\"status\":\"ok\",\"data\":{\"success\":[\"70664141188\",\"70664141185\"],\"failed\":[]}}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200,
+    }
+  }
+]

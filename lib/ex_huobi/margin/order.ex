@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Order do
+  @type t :: %__MODULE__{}
+
   defstruct ~w(
     id
     symbol

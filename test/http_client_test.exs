@@ -21,8 +21,8 @@ defmodule ExHuobi.Rest.HTTPClientTest do
 
     test "should return correct signed_path" do
       {:ok, signed_path} =
-        ExHuobi.Rest.HTTPClient.prepare_request(
-          "GET",
+        Util.prepare_request(
+          :GET,
           "https://api.hbdm.com",
           "/api/v1/contract_order",
           %{

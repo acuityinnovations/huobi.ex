@@ -3,7 +3,6 @@ defmodule ExHuobi.Futures.Private do
 
   @hbdm_host "api.hbdm.com"
 
-
   @doc """
   Place order in the huobi futures exchanges
 
@@ -23,7 +22,7 @@ defmodule ExHuobi.Futures.Private do
     })
   """
   def create_order(order, config \\ nil) do
-    post(@hbdm_host, "/api/v1/contract_order", order, config)
+    HTTPClient.post(@hbdm_host, "/api/v1/contract_order", order, config)
   end
 
   @doc """
@@ -51,13 +50,12 @@ defmodule ExHuobi.Futures.Private do
       lever_rate: 5,
       offset: "open",
       order_price_type: "limit"
-    } 
+    }
   ])
   """
   def create_bulk_orders(orders, config \\ nil) do
-    post(@hbdm_host, "/api/v1/contract_order", orders, config)
+    HTTPClient.post(@hbdm_host, "/api/v1/contract_order", orders, config)
   end
-
 
   @doc """
   Cancel on order in huobi future exchanges using order id
@@ -72,9 +70,8 @@ defmodule ExHuobi.Futures.Private do
   })
   """
   def cancel_order(order, config \\ nil) do
-    post(@hbdm_host, "/api/v1/contract_cancel", order, config)
+    HTTPClient.post(@hbdm_host, "/api/v1/contract_cancel", order, config)
   end
-
 
   @doc """
   Get user position in huobi exchange
@@ -86,6 +83,11 @@ defmodule ExHuobi.Futures.Private do
   iex> ExHuobi.Futures.Private.get_position("BTC")
   """
   def get_position(instrument_id, config \\ nil) do
-    post(@hbdm_host, "/api/v1/contract_position_info", %{"symbol" => instrument_id}, config)
+    HTTPClient.post(
+      @hbdm_host,
+      "/api/v1/contract_position_info",
+      %{"symbol" => instrument_id},
+      config
+    )
   end
 end
