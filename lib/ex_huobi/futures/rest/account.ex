@@ -1,11 +1,13 @@
 defmodule ExHuobi.Futures.Rest.Account do
   alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Futures.Util
 
-  @type params :: map
   @type config :: ExHuobi.Config.t()
+  @type position :: map
 
   @hbdm_host "https://api.hbdm.com"
 
+  @spec get_position(String.t(), config | nil) :: {:error, any} | {:ok, [position]}
   def get_position(instrument_id, config \\ nil) do
     HTTPClient.post(
       @hbdm_host,
@@ -13,5 +15,6 @@ defmodule ExHuobi.Futures.Rest.Account do
       %{"symbol" => instrument_id},
       config
     )
+    |> Util.parse_response()
   end
 end
