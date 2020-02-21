@@ -27,6 +27,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   @spec create_order(map, config) :: {:ok, map} | {:error, any}
   def create_order(order, config \\ nil) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_order", order, config)
+    |> IO.inspect()
     |> ExHuobi.Futures.Util.parse_response()
   end
 
@@ -61,6 +62,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   @spec create_bulk_orders(list(map), config) :: {:ok, list} | {:error, any}
   def create_bulk_orders(orders, config \\ nil) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_order", orders, config)
+    |> IO.inspect()
     |> ExHuobi.Futures.Util.parse_response()
   end
 
@@ -79,6 +81,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   @spec cancel_order(map, config) :: {:ok, any} | {:error, any}
   def cancel_order(order, config \\ nil) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_cancel", order, config)
+    |> IO.inspect()
     |> ExHuobi.Futures.Util.parse_response()
   end
 end

@@ -11,7 +11,6 @@ defmodule ExHuobi.Futures.Util do
     end
   end
 
-
   defp handle_success_response(status_code, body) do
     if status_code in 200..299 do
       case Jason.decode!(body) do

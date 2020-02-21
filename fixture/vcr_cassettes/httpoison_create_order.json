@@ -1,0 +1,35 @@
+[
+  {
+    "request": {
+      "body": "null",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_order?AccessKeyId=12343&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-02-21T11%3A14%3A41&Signature=euqmC++VbUcNMcahoGMRNb71IU1A6spji7NAyDc9C7I="
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"error\",\"err_code\":1030,\"err_msg\":\"Abnormal service. Please try again later.\",\"ts\":1582283681847}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 11:14:41 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "107",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d87d22e0b12815891b442735e0bdbcc4a1582283681; expires=Sun, 22-Mar-20 11:14:41 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "05cac8f44fa841e68fe0d3bcda863876",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "56884c516810d054-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
