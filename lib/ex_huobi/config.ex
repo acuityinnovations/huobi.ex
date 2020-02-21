@@ -13,7 +13,7 @@ defmodule ExHuobi.Config do
   Get default API configs
 
   ## Examples
-      iex> Binance.Config.get()
+      iex> ExHuobi.Config.get()
   """
   def get(nil) do
     %__MODULE__{
@@ -26,7 +26,7 @@ defmodule ExHuobi.Config do
   Get dynamic API configs via ENVs
 
   ## Examples
-      iex> Binance.Config.get(%{access_keys: ["B1_API_KEY", "B1_API_SECRET"]})
+      iex> ExHuobi.Config.get(%{access_keys: ["H1_API_KEY", "H1_API_SECRET"]})
   """
   def get(%{
         access_keys: [api_key_access, api_secret_access]
