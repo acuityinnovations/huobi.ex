@@ -3,6 +3,10 @@ defmodule ExHuobi.Margin.Rest.Order do
 
   @margin_endpoint "https://api.huobi.pro"
 
+  @spec get_order(any, any) ::
+          {:error,
+           {:error, {:config_missing, <<_::200>>}} | {:huobi_error, %{code: any, msg: any}}}
+          | {:ok, {:ok, [any] | %{:__struct__ => atom, optional(atom) => any}}}
   def get_order(order_id, config \\ nil) do
     case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config) do
       {:ok, data} ->
