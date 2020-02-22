@@ -3,6 +3,11 @@ defmodule ExHuobi.Rest.HTTPClientTest do
   alias ExHuobi.Util
   doctest ExHuobi.Rest.HTTPClient
 
+  @config %ExHuobi.Config{
+    api_key: System.get_env("HUOBI_API_KEY"),
+    api_secret: System.get_env("HUOBI_API_SECRET")
+  }
+
   describe "test helper functions in http client" do
     test "timestamp should return correct format" do
       timestamp = Util.get_timestamp()
@@ -20,7 +25,7 @@ defmodule ExHuobi.Rest.HTTPClientTest do
     end
 
     test "should return correct signed_path" do
-      {:ok, signed_path} =
+      signed_path =
         Util.prepare_request(
           :GET,
           "https://api.hbdm.com",
@@ -29,10 +34,10 @@ defmodule ExHuobi.Rest.HTTPClientTest do
             "key1" => "value1",
             "key2" => "value2"
           },
-          nil
+          @config
         )
 
-      [first, second] = String.split(signed_path, "?")
+      [first, _] = String.split(signed_path, "?")
       assert String.starts_with?(first, "https://api.hbdm.com") == true
       assert String.ends_with?(first, "/api/v1/contract_order") == true
     end

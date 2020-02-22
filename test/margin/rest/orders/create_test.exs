@@ -9,10 +9,10 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
     :ok
   end
 
-  setup do
-    ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes", "fixture/custom_cassettes")
-    :ok
-  end
+  @config %ExHuobi.Config{
+    api_key: System.get_env("HUOBI_API_KEY"),
+    api_secret: System.get_env("HUOBI_API_SECRET")
+  }
 
   test "create order" do
     use_cassette "rest/orders/create", custom: true do
@@ -27,7 +27,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         source: "super-margin-api"
       }
 
-      {:ok, order} = Rest.create(params)
+      {:ok, order} = Rest.create(params, @config)
       assert return_id == order.id
     end
   end
@@ -53,7 +53,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         }
       ]
 
-      {:ok, orders} = Rest.bulk_create(params)
+      {:ok, orders} = Rest.bulk_create(params, @config)
       assert length(orders) == 2
     end
   end

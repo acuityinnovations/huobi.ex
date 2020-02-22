@@ -20,7 +20,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.get(signed_url)
-        |> parse_response
     end
   end
 
@@ -32,7 +31,6 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.get(signed_url)
-        |> parse_response
     end
   end
 
@@ -44,27 +42,8 @@ defmodule ExHuobi.Rest.HTTPClient do
 
       {:ok, signed_url} ->
         HTTPoison.post(signed_url, Jason.encode!(params), headers())
-        |> parse_response
     end
   end
 
   defp headers, do: ["Content-Type": "application/json"]
-
-  defp parse_response({:ok, response}) do
-    response.body
-    |> Jason.decode()
-    |> case do
-      {:ok, %{"status" => "error", "err-code" => err_code, "err-msg" => err_msg}} ->
-        {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
-
-      {:ok, %{"status" => "ok", "data" => [%{"err-code" => err_code, "err-msg" => err_msg}, _]}} ->
-        {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
-
-      {:ok, %{"status" => "ok", "data" => data}} ->
-        {:ok, data}
-
-      {:error, error} ->
-        {:error, {:poison_decode_error, error}}
-    end
-  end
 end

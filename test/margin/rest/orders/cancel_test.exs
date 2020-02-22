@@ -9,35 +9,25 @@ defmodule ExHuobi.Rest.Orders.CancelTest do
     :ok
   end
 
-  setup do
-    ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes", "fixture/custom_cassettes")
-    :ok
-  end
+  @config %ExHuobi.Config{
+    api_key: System.get_env("HUOBI_API_KEY"),
+    api_secret: System.get_env("HUOBI_API_SECRET")
+  }
 
   test "cancel order" do
     use_cassette "rest/orders/cancel", custom: true do
       cancel_id = "70662287304"
-
-      params = %{
-        "account-id": 123_456_789,
-        amount: 0.0001,
-        price: 11000,
-        symbol: "btcusdt",
-        type: "sell-limit",
-        source: "super-margin-api"
-      }
-
-      {:ok, order} = Rest.cancel(cancel_id)
+      {:ok, order} = Rest.cancel(cancel_id, @config)
       assert cancel_id == order.id
     end
   end
 
   test "cancel order batch" do
     use_cassette "rest/orders/bulk_cancel", custom: true do
-      params = %{"order-id": [70_664_141_188, 70_664_141_185]}
+      params = %{"order-id": ["70664141188", "70664141185"]}
 
-      {:ok, orders} = Rest.bulk_cancel(params)
-      # assert length(orders) == 2
+      {:ok, data} = Rest.bulk_cancel(params, @config)
+      assert length(data["success"]) == 2
     end
   end
 end

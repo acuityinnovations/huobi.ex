@@ -1,5 +1,5 @@
 defmodule ExHuobi.Margin.Rest.Account do
-  alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Margin.Rest.HTTPClient
   alias ExHuobi.Margin.Account
   @margin_endpoint "https://api.huobi.pro"
 
@@ -12,7 +12,7 @@ defmodule ExHuobi.Margin.Rest.Account do
   @type response :: success_response | failure_response
 
   @spec get(config) :: response
-  def get(config \\ nil) do
+  def get(config) do
     case HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}

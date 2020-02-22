@@ -1,25 +1,26 @@
 defmodule ExHuobi.Margin.Rest.Order do
-  alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Margin.Rest.HTTPClient
   alias ExHuobi.Margin.Order
   @margin_endpoint "https://api.huobi.pro"
 
   @type order_id :: integer
   @type params :: map | [map]
   @type config :: Config.t()
-  @type success_response :: {:ok, integer} | {:ok, Order.t()} | {:ok, [Order.t()]}
+  @type success_response :: {:ok, String.t()} | {:ok, Order.t()} | {:ok, [Order.t()]}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}
           | {:error, {:huobi_error, %{code: String.t(), msg: String.t()}}}
+          | {:error, {:config_missing, String.t()}}
   @type response :: success_response | failure_response
 
   @spec get(order_id, config) :: response
-  def get(order_id, config \\ nil) do
+  def get(order_id, config) do
     case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 
@@ -27,16 +28,25 @@ defmodule ExHuobi.Margin.Rest.Order do
   Create orders.
   ## Examples
 
-    iex> ExHuobi.Margin.Rest.Order.create(%{"account-id": 12035991, amount: 0.0001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"})
+  iex> ExHuobi.Margin.Rest.Order.create(
+    %{
+      "account-id": 12035991,
+      amount: 0.001,
+      price: 9900,
+      symbol: "btcusdt",
+      type: "sell-limit",
+      source: "super-margin-api"
+    },
+    config)
   """
   @spec create(params, config) :: response
-  def create(params, config \\ nil) do
+  def create(params, config) do
     case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config) do
       {:ok, data} ->
         {:ok, %Order{id: data}}
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 
@@ -45,22 +55,22 @@ defmodule ExHuobi.Margin.Rest.Order do
   ## Examples
 
     iex> ExHuobi.Margin.Rest.Order.bulk_create([
-      %{"account-id": 12035991, amount: 0.0001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"},
-      %{"account-id": 12035991, amount: 0.0001, price: 11500 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"}
-    ])
+      %{"account-id": 12035991, amount: 0.001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"},
+      %{"account-id": 12035991, amount: 0.001, price: 11500 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"}
+    ], config)
   """
   @spec bulk_create(params, config) :: response
-  def bulk_create(params, config \\ nil) do
+  def bulk_create(params, config) do
     case HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config) do
       {:ok, data} ->
-        {:ok, data |> transform() |> parse_to_obj()}
+        {:ok, data |> add_id() |> parse_to_obj()}
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 
-  defp transform(data) do
+  defp add_id(data) do
     data |> Enum.map(fn el -> Map.put(el, "id", el["order-id"]) end)
   end
 
@@ -68,16 +78,16 @@ defmodule ExHuobi.Margin.Rest.Order do
   Get open orders.
   ## Examples
 
-    iex> ExHuobi.Margin.Rest.Order.get_open(%{"account-id": 12035991, symbol: "btcusdt"})
+    iex> ExHuobi.Margin.Rest.Order.get_open(%{"account-id": 12035991, symbol: "btcusdt"}, config)
   """
   @spec get_open(params, config) :: response
-  def get_open(params, config \\ nil) do
+  def get_open(params, config) do
     case HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 
@@ -85,21 +95,21 @@ defmodule ExHuobi.Margin.Rest.Order do
   Cancel order.
   ## Examples
 
-    iex> ExHuobi.Margin.Rest.Order.cancel_order(70469904946)
+    iex> ExHuobi.Margin.Rest.Order.cancel(70469904946, config)
   """
   @spec cancel(order_id, config) :: response
-  def cancel(order_id, config \\ nil) do
+  def cancel(order_id, config) do
     case HTTPClient.post(
            @margin_endpoint,
            "/v1/order/orders/#{order_id}/submitcancel",
-           "",
+           %{},
            config
          ) do
       {:ok, order_id} ->
         {:ok, %Order{id: order_id}}
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 
@@ -107,16 +117,16 @@ defmodule ExHuobi.Margin.Rest.Order do
   Bulk cancel order.
   ## Examples
 
-    iex> ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]})
+    iex> ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]}, config)
   """
   @spec bulk_cancel(params, config) :: response
-  def bulk_cancel(params, config \\ nil) do
+  def bulk_cancel(params, config) do
     case HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config) do
-      {:ok, data} ->
-        {:ok, data}
+      {:ok, _} = data ->
+        data
 
-      {:error, error} ->
-        {:error, error}
+      {:error, _} = error ->
+        error
     end
   end
 

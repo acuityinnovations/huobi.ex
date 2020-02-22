@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :binance,
+config :huobi,
   api_key: "",
   secret_key: ""
 

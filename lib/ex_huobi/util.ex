@@ -8,73 +8,46 @@ defmodule ExHuobi.Util do
   @type path :: String.t()
   @type params :: map
   @type config :: Config.t()
-  @type auth_response :: {:ok, Config.t()} | {:error, {:config_missing, String.t()}}
+  @type response :: String.t()
 
-  @spec prepare_request(verb, base_url, path, config) :: auth_response
+  defmacro prepare_common(verb, base_url, path, config, do: yield) do
+    quote do
+      verb_to_sign = unquote(verb) |> Atom.to_string() |> Kernel.<>("\n")
+      host_to_sign = unquote(base_url) |> URI.parse() |> Map.get(:host) |> Kernel.<>("\n")
+      base_resource_to_sign = unquote(path) |> Kernel.<>("\n")
+
+      text_to_sign = unquote(yield)
+
+      signature =
+        sign_content(
+          unquote(config).api_secret,
+          verb_to_sign <> host_to_sign <> base_resource_to_sign <> text_to_sign
+        )
+
+      signed_url =
+        unquote(base_url) <> unquote(path) <> "?" <> text_to_sign <> "&Signature=#{signature}"
+    end
+  end
+
+  @spec prepare_request(verb, base_url, path, config) :: response
   def prepare_request(verb, base_url, path, config) do
-    case validate_credentials(config) do
-      {:error, error} ->
-        {:error, error}
-
-      {:ok, %Config{api_key: api_key, api_secret: api_secret}} ->
-        verb_to_sign = verb |> Atom.to_string() |> Kernel.<>("\n")
-        host_to_sign = URI.parse(base_url).host <> "\n"
-        base_resource_to_sign = path <> "\n"
-
-        text_to_sign =
-          api_key
-          |> get_default_text_to_sign()
-          |> URI.encode_query()
-
-        signature =
-          sign_content(
-            api_secret,
-            verb_to_sign <> host_to_sign <> base_resource_to_sign <> text_to_sign
-          )
-
-        signed_url = base_url <> path <> "?" <> text_to_sign <> "&Signature=#{signature}"
-        {:ok, signed_url}
+    prepare_common(verb, base_url, path, config) do
+      config.api_key
+      |> get_default_text_to_sign()
+      |> URI.encode_query()
     end
   end
 
-  @spec prepare_request(verb, base_url, path, params, config) :: auth_response
+  @spec prepare_request(verb, base_url, path, params, config) :: response
   def prepare_request(verb, base_url, path, params, config) do
-    case validate_credentials(config) do
-      {:error, error} ->
-        {:error, error}
+    prepare_common(verb, base_url, path, config) do
+      default_text_to_sign =
+        config.api_key
+        |> get_default_text_to_sign()
+        |> URI.encode_query()
 
-      {:ok, %Config{api_key: api_key, api_secret: api_secret}} ->
-        verb_to_sign = verb |> Atom.to_string() |> Kernel.<>("\n")
-        host_to_sign = URI.parse(base_url).host <> "\n"
-        base_resource_to_sign = path <> "\n"
-
-        default_text_to_sign =
-          api_key
-          |> get_default_text_to_sign()
-          |> URI.encode_query()
-
-        params_to_sign = params |> URI.encode_query()
-        text_to_sign = default_text_to_sign <> "&" <> params_to_sign
-
-        signature =
-          sign_content(
-            api_secret,
-            verb_to_sign <> host_to_sign <> base_resource_to_sign <> text_to_sign
-          )
-
-        signed_url = base_url <> path <> "?" <> text_to_sign <> "&Signature=#{signature}"
-        {:ok, signed_url}
-    end
-  end
-
-  defp validate_credentials(config) do
-    case Config.get(config) do
-      %Config{api_key: api_key, api_secret: api_secret} = config
-      when is_binary(api_key) and is_binary(api_secret) ->
-        {:ok, config}
-
-      _ ->
-        {:error, {:config_missing, "Secret or API key missing"}}
+      params_to_sign = params |> URI.encode_query()
+      default_text_to_sign <> "&" <> params_to_sign
     end
   end
 
