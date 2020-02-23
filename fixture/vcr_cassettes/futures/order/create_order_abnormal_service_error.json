@@ -12,7 +12,7 @@
       },
       "response": {
         "binary": false,
-        "body": "{\"status\":\"error\",\"err_code\":403,\"err_msg\":\"Verification failure [校验失败]\",\"ts\":1582453227285}",
+        "body": "{\"status\":\"error\",\"err_code\":1030,\"err_msg\":\"Abnormal service. Please try again later.\",\"ts\":1582271708921}",
         "headers": {
           "Date": "Sun, 23 Feb 2020 10:20:27 GMT",
           "Content-Type": "text/plain;charset=UTF-8",

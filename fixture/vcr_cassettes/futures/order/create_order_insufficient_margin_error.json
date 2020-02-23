@@ -12,7 +12,7 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"status\":\"error\",\"err_code\":403,\"err_msg\":\"Incorrect Access key [Access key错误]\",\"ts\":1582453227285}",
+      "body": "{\"status\":\"error\",\"err_code\":1047,\"err_msg\":\"Insufficient margin available.\",\"ts\":1582453227285}",
       "headers": {
         "Date": "Sun, 23 Feb 2020 10:20:27 GMT",
         "Content-Type": "text/plain;charset=UTF-8",
