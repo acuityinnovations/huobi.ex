@@ -1,0 +1,22 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/order/orders/70646394808)/"
+    },
+    "response": {
+      "body": "{\"status\":\"ok\",\"data\":{\"id\":70646394808,\"symbol\":\"btcusdt\",\"account-id\":12035991,\"client-order-id\":\"\",\"amount\":\"0.000100000000000000\",\"price\":\"11000.000000000000000000\",\"created-at\":1582266025313,\"type\":\"sell-limit\",\"field-amount\":\"0.0\",\"field-cash-amount\":\"0.0\",\"field-fees\":\"0.0\",\"finished-at\":0,\"source\":\"super-margin-api\",\"state\":\"submitted\",\"canceled-at\":0}}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200
+    }
+  }
+]
