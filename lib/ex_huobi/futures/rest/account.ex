@@ -7,7 +7,7 @@ defmodule ExHuobi.Futures.Rest.Account do
 
   @hbdm_host "https://api.hbdm.com"
 
-  @spec get_position(String.t, config) :: {:error, any} | {:ok, any}
+  @spec get_position(String.t(), config) :: {:error, any} | {:ok, any}
   def get_position(instrument_id, config) do
     HTTPClient.post(
       @hbdm_host,

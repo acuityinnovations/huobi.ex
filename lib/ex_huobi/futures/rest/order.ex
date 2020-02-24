@@ -3,7 +3,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   alias ExHuobi.Futures.Util
 
   @type params :: map
-  @type config :: Config.t
+  @type config :: Config.t()
 
   @hbdm_host "https://api.hbdm.com"
 
