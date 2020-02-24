@@ -5,7 +5,7 @@ defmodule ExHuobi.Margin.Rest.HTTPClient do
   @type base_url :: String.t()
   @type path :: String.t()
   @type params :: map
-  @type config :: ExHuobi.Config.t()
+  @type config :: ExHuobi.Config.config_or_nil
   @type success_response :: {:ok, any}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}
@@ -15,7 +15,7 @@ defmodule ExHuobi.Margin.Rest.HTTPClient do
   @type response :: success_response | failure_response
 
   @spec get(base_url, path, config) :: response
-  def get(base_url, path, config) do
+  def get(base_url, path, config \\ nil) do
     Util.prepare_request(:GET, base_url, path, config)
     |> HTTPoison.get()
     |> parse_response
@@ -29,7 +29,7 @@ defmodule ExHuobi.Margin.Rest.HTTPClient do
   end
 
   @spec post(base_url, path, params, config) :: response
-  def post(base_url, path, params, config) do
+  def post(base_url, path, params, config \\ nil) do
     Util.prepare_request(:POST, base_url, path, config)
     |> HTTPoison.post(Jason.encode!(params), headers())
     |> parse_response

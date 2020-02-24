@@ -7,7 +7,7 @@ defmodule ExHuobi.Util do
   @type base_url :: String.t()
   @type path :: String.t()
   @type params :: map
-  @type config :: Config.t()
+  @type config :: Config.t() | nil
   @type response :: String.t()
 
   defmacro prepare_common(verb, base_url, path, config, do: yield) do

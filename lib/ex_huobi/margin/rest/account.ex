@@ -4,7 +4,7 @@ defmodule ExHuobi.Margin.Rest.Account do
   @margin_endpoint "https://api.huobi.pro"
 
   @type params :: map
-  @type config :: Config.t()
+  @type config :: ExHuobi.Config.config_or_nil
   @type success_response :: {:ok, integer} | {:ok, Account.t()} | {:ok, [Account.t()]}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}
@@ -12,7 +12,7 @@ defmodule ExHuobi.Margin.Rest.Account do
   @type response :: success_response | failure_response
 
   @spec get(config) :: response
-  def get(config) do
+  def get(config \\ nil) do
     case HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config) do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
