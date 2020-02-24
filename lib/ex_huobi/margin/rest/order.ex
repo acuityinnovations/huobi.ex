@@ -20,8 +20,8 @@ defmodule ExHuobi.Margin.Rest.Order do
         config \\ nil
       ) do
     case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config) do
-      {:ok, data} ->
-        {:ok, %ExHuobi.Margin.Order{id: data}}
+      {:ok, order_id} ->
+        {:ok, %ExHuobi.Margin.Order{id: order_id}}
 
       error ->
         error
