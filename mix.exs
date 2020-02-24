@@ -22,10 +22,10 @@ defmodule ExHuobi.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.6"},
-      {:poison, "~> 3.1"},
       {:jason, "~> 1.1.0"},
       {:mapail, "~> 1.0.2"},
       {:ex_doc, ">= 0.0.0", only: :dev},
+      {:exvcr, "~> 0.10", only: :test},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:exvcr, "~> 0.10", only: :test}

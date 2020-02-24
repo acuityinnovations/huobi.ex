@@ -1,0 +1,22 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/order/orders/70662287304/submitcancel)/"
+    },
+    "response": {
+      "body": "{\"status\":\"ok\",\"data\":\"70662287304\"}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200,
+    }
+  }
+]

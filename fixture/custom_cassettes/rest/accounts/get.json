@@ -1,0 +1,22 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "~r/(https://api.huobi.pro/v1/account/accounts)/"
+    },
+    "response": {
+      "body": "{\"status\":\"ok\",\"data\":[{\"id\":123456789,\"type\":\"spot\",\"subtype\":\"\",\"state\":\"working\"},{\"id\":123456780,\"type\":\"super-margin\",\"subtype\":\"\",\"state\":\"working\"}]}",
+      "headers": {
+        "Date": "Fri, 21 Feb 2020 06:20:25 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      "status_code": 200
+    }
+  }
+]
