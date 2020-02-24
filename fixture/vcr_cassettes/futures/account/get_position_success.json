@@ -1,0 +1,35 @@
+[
+  {
+    "request": {
+      "body": "{\"symbol\":\"BTC\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_position_info?AccessKeyId=12343&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-02-23T10%3A56%3A56&Signature=NZ316t2l5KUWMv2vVb7bhB7spJkI5qntU9lUoMg+h7Q="
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"data\":[{\"available\":0,\"contract_code\":\"BTC180914\",\"contract_type\":\"this_week\",\"cost_hold\":422.78,\"cost_open\":422.78,\"direction\":\"buy\",\"frozen\":0.3,\"last_price\":7900.17,\"lever_rate\":10,\"position_margin\":3.4,\"profit\":0.97,\"profit_rate\":0.07,\"profit_unreal\":7.096e-5,\"symbol\":\"BTC\",\"volume\":1}],\"status\":\"ok\",\"ts\":158797866555}",
+      "headers": {
+        "Date": "Sun, 23 Feb 2020 10:56:57 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "104",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=de759d4bfc2a9b46114ce3bd866cf516c1582455417; expires=Tue, 24-Mar-20 10:56:57 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "11410c19acea4262a13ba568f5372f7e",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5698ad162d83c6e0-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
