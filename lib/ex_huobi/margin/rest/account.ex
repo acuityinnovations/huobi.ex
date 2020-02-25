@@ -15,7 +15,8 @@ defmodule ExHuobi.Margin.Rest.Account do
 
   @spec get(config) :: response
   def get(config \\ nil) do
-    case HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config) |> Handler.parse_response() do
+    case HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config)
+         |> Handler.parse_response() do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
