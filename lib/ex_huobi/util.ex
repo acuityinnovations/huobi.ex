@@ -7,7 +7,7 @@ defmodule ExHuobi.Util do
   @type base_url :: String.t()
   @type path :: String.t()
   @type params :: map
-  @type config :: Config.t()
+  @type config :: Config.t() | nil
   @type response :: String.t()
 
   defmacro prepare_common(verb, base_url, path, config, do: yield) do
@@ -60,11 +60,12 @@ defmodule ExHuobi.Util do
     |> Base.encode64()
   end
 
-  def get_authen_ws_message(config) do
+  def get_authen_ws_message(config, endpoint) do
     %{api_key: api_key, api_secret: api_secret} = ExHuobi.Config.get(config)
+    %{host: host, path: path} = URI.parse(endpoint)
     time = ExHuobi.Util.get_timestamp()
     default_text_to_sign = get_default_text_to_sign(api_key, time) |> URI.encode_query()
-    content = "GET" <> "\n" <> "api.huobi.pro" <> "\n" <> "/ws/v1" <> "\n" <> default_text_to_sign
+    content = "GET" <> "\n" <> host <> "\n" <> path <> "\n" <> default_text_to_sign
     signature = sign_content(api_secret, content)
 
     %{
