@@ -51,17 +51,6 @@ defmodule ExHuobi.Util do
     end
   end
 
-  defp validate_credentials(config) do
-    case Config.get(config) do
-      %Config{api_key: api_key, api_secret: api_secret} = config
-      when is_binary(api_key) and is_binary(api_secret) ->
-        {:ok, config}
-
-      _ ->
-        {:error, {:config_missing, "Secret or API key missing"}}
-    end
-  end
-
   defp sign_content(key, content) do
     :crypto.hmac(
       :sha256,
