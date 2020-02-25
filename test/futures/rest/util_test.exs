@@ -1,5 +1,5 @@
-defmodule ExHuobi.Futures.Rest.UtilTest do
-  alias ExHuobi.Futures.Util
+defmodule ExHuobi.Futures.Rest.HandlerTest do
+  alias ExHuobi.Futures.Rest.Handler, as: Util
 
   use ExUnit.Case, async: true
 

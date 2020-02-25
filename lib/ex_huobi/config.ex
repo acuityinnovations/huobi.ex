@@ -6,8 +6,6 @@ defmodule ExHuobi.Config do
           api_secret: String.t()
         }
 
-  @type config_or_nil :: ExHuobi.Config.config_or_nil
-
   @enforce_keys [:api_key, :api_secret]
   defstruct [:api_key, :api_secret]
 

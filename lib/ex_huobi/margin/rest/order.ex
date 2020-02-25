@@ -1,11 +1,13 @@
 defmodule ExHuobi.Margin.Rest.Order do
-  alias ExHuobi.Margin.Rest.HTTPClient
+  alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Margin.Order
+
   @margin_endpoint "https://api.huobi.pro"
 
   @type order_id :: integer
   @type params :: map | [map]
-  @type config :: ExHuobi.Config.config_or_nil
+  @type config :: ExHuobi.Config.t() | nil
   @type success_response :: {:ok, String.t()} | {:ok, Order.t()} | {:ok, [Order.t()]}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}
@@ -15,7 +17,8 @@ defmodule ExHuobi.Margin.Rest.Order do
 
   @spec get(order_id, config) :: response
   def get(order_id, config) do
-    case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config) do
+    case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config)
+         |> Handler.parse_response() do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
@@ -41,7 +44,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec create(params, config) :: response
   def create(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config) do
+    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config)
+         |> Handler.parse_response() do
       {:ok, data} ->
         {:ok, %Order{id: data}}
 
@@ -61,7 +65,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_create(params, config) :: response
   def bulk_create(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config) do
+    case HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config)
+         |> Handler.parse_response() do
       {:ok, data} ->
         {:ok, data |> add_id() |> parse_to_obj()}
 
@@ -82,7 +87,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec get_open(params, config) :: response
   def get_open(params, config) do
-    case HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config) do
+    case HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config)
+         |> Handler.parse_response() do
       {:ok, data} ->
         {:ok, data |> parse_to_obj()}
 
@@ -104,7 +110,8 @@ defmodule ExHuobi.Margin.Rest.Order do
            "/v1/order/orders/#{order_id}/submitcancel",
            %{},
            config
-         ) do
+         )
+         |> Handler.parse_response() do
       {:ok, order_id} ->
         {:ok, %Order{id: order_id}}
 
@@ -121,7 +128,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_cancel(params, config) :: response
   def bulk_cancel(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config) do
+    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config)
+         |> Handler.parse_response() do
       {:ok, _} = data ->
         data
 

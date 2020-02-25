@@ -1,8 +1,8 @@
 defmodule ExHuobi.Futures.Rest.Account do
   alias ExHuobi.Rest.HTTPClient
-  alias ExHuobi.Futures.Util
+  alias ExHuobi.Futures.Rest.Handler
 
-  @type config :: ExHuobi.Config.config_or_nil
+  @type config :: ExHuobi.Config.t() | nil
   @type position :: map
 
   @hbdm_host "https://api.hbdm.com"
@@ -15,6 +15,6 @@ defmodule ExHuobi.Futures.Rest.Account do
       %{"symbol" => instrument_id},
       config
     )
-    |> Util.parse_response()
+    |> Handler.parse_response()
   end
 end
