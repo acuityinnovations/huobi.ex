@@ -62,7 +62,7 @@ ExHuobi.Margin.Rest.Order.bulk_create(
 )
 
 # Cancel multiple orders
-ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]})
+ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]}, config)
 ```
 
 ## Futures Exchange API
