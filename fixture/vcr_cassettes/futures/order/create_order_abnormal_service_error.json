@@ -1,0 +1,35 @@
+[
+    {
+      "request": {
+        "body": "{\"contract_type\":\"this_week\",\"direction\":\"Buy\",\"lever_rate\":5,\"offset\":\"open\",\"order_price_type\":\"limit\",\"price\":5000,\"symbol\":\"BTC\",\"volume\":1}",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "post",
+        "options": [],
+        "request_body": "",
+        "url": "https://api.hbdm.com/api/v1/contract_order?AccessKeyId=12343&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-02-23T10%3A20%3A26&Signature=9T6AXwDibFfX+VzC4W9WTgATCSqINGfog+fPIYqLikc="
+      },
+      "response": {
+        "binary": false,
+        "body": "{\"status\":\"error\",\"err_code\":1030,\"err_msg\":\"Abnormal service. Please try again later.\",\"ts\":1582271708921}",
+        "headers": {
+          "Date": "Sun, 23 Feb 2020 10:20:27 GMT",
+          "Content-Type": "text/plain;charset=UTF-8",
+          "Content-Length": "104",
+          "Connection": "keep-alive",
+          "Set-Cookie": "__cfduid=d13038a66336e3dc120773ab624a1d1961582453226; expires=Tue, 24-Mar-20 10:20:26 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+          "Pragma": "no-cache",
+          "Cache-Control": "no-cache, no-store",
+          "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+          "ReqId": "d9540e9012654b72b61e4522d4cd13fa",
+          "CF-Cache-Status": "DYNAMIC",
+          "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "Server": "cloudflare",
+          "CF-RAY": "5698779c2811c6fc-SGN"
+        },
+        "status_code": 200,
+        "type": "ok"
+      }
+    }
+  ]

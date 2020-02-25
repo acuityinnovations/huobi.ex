@@ -1,8 +1,9 @@
 defmodule ExHuobi.Futures.Rest.Order do
   alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Futures.Rest.Handler
 
-  # @type params :: map
-  # @type config :: ExHuobi.Config.t()
+  @type params :: map
+  @type config :: ExHuobi.Config.t()
 
   @hbdm_host "https://api.hbdm.com"
 
@@ -24,8 +25,10 @@ defmodule ExHuobi.Futures.Rest.Order do
   #     order_price_type: "limit"
   #   })
   # """
-  def create_order(order, config \\ nil) do
+  @spec create_order(map, config) :: {:ok, map} | {:error, any}
+  def create_order(order, config) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_order", order, config)
+    |> Handler.parse_response()
   end
 
   # @doc """
@@ -56,8 +59,10 @@ defmodule ExHuobi.Futures.Rest.Order do
   #   }
   # ])
   # """
-  def create_bulk_orders(orders, config \\ nil) do
+  @spec create_bulk_orders(list(map), config) :: {:ok, list} | {:error, any}
+  def create_bulk_orders(orders, config) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_order", orders, config)
+    |> Handler.parse_response()
   end
 
   # @doc """
@@ -72,7 +77,9 @@ defmodule ExHuobi.Futures.Rest.Order do
   #   "symbol": "BTC"
   # })
   # """
-  def cancel_order(order, config \\ nil) do
+  @spec cancel_order(map, config) :: {:ok, any} | {:error, any}
+  def cancel_order(order, config) do
     HTTPClient.post(@hbdm_host, "/api/v1/contract_cancel", order, config)
+    |> Handler.parse_response()
   end
 end
