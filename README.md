@@ -73,7 +73,7 @@ config = %ExHuobi.Config{
 }
 # Get account position
 symbol = "BTC|ETH..."
-ExHuobi.Futures.Rest.Account.get_position(symbol)
+ExHuobi.Futures.Rest.Account.get_position(symbol, config)
 
 # Create new order
 order = %{
@@ -86,7 +86,7 @@ order = %{
         "symbol" => "BTC",
         "volume" => 1
       }
-ExHuobi.Futures.Rest.Order.create_order(order)
+ExHuobi.Futures.Rest.Order.create_order(order, config)
 
 # Create multiple orders
 orders = [
@@ -113,12 +113,12 @@ orders = [
     ]
 
 
-ExHuobi.Futures.Rest.Order.create_bulk_orders(orders)
+ExHuobi.Futures.Rest.Order.create_bulk_orders(orders, config)
 
 # Cancel order
 
 order_id = 1234567890
 
-ExHuobi.Futures.Rest.Order.create_bulk_orders(order_id)
+ExHuobi.Futures.Rest.Order.create_bulk_orders(order_id, config)
 
 ```
