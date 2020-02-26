@@ -1,21 +1,20 @@
-defmodule ExHuobi.OrderWs do
-  defmacro __using__(opts_injected) do
+defmodule ExHuobi.Future.Websocket.OrderWs do
+  defmacro __using__(_opts) do
     quote do
       use WebSockex
       require Logger
+      @endpoint "wss://www.hbdm.com/ws"
 
       def start_link(args \\ %{}) do
-        subscription = args[:subscribe] || ["orders.btcusdt.update", "orders.htusdt.update"]
+        subscription = args[:subscribe] || ["orders.btc"]
         opts = consturct_opts(args)
-        endpoint = Map.get(unquote(opts_injected), :endpoint)
 
         state =
           args
           |> Map.merge(%{subscribe: subscription})
           |> Map.merge(Map.new(opts))
-          |> Map.merge(unquote(opts_injected))
 
-        WebSockex.start_link(endpoint, __MODULE__, state, opts)
+        WebSockex.start_link(@endpoint, __MODULE__, state, opts)
       end
 
       defp consturct_opts(args) do
@@ -31,7 +30,7 @@ defmodule ExHuobi.OrderWs do
       end
 
       def authenticate(server, {config, endpoint}) do
-        message = ExHuobi.Util.get_authen_ws_message(config, endpoint)
+        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint)
         reply_op(server, message)
       end
 
@@ -45,11 +44,7 @@ defmodule ExHuobi.OrderWs do
       end
 
       def pong(server, ts) do
-        message = %{
-          op: "pong",
-          ts: ts
-        }
-
+        message = %{pong: ts}
         reply_op(server, message)
       end
 
@@ -68,8 +63,7 @@ defmodule ExHuobi.OrderWs do
       @impl true
       def handle_info(:authenticate, state) do
         config = Map.get(state, :config)
-        endpoint = Map.get(state, :endpoint)
-        authenticate(self(), {config, endpoint})
+        authenticate(self(), {config, @endpoint})
         {:ok, state}
       end
 
@@ -87,7 +81,8 @@ defmodule ExHuobi.OrderWs do
           {:ok, %{"op" => "auth", "err-code" => 0}} ->
             Enum.each(topics, &subscribe(self(), &1))
 
-          {:ok, %{"op" => "ping", "ts" => ts}} ->
+          {:ok, %{"ping" => ts} = payload} ->
+            handle_response(payload, state)
             pong(self(), ts)
 
           {:ok, payload} ->

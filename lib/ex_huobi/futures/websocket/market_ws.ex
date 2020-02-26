@@ -1,24 +1,21 @@
-defmodule ExHuobi.MarketWs do
-  defmacro __using__(opts_injected) do
+defmodule ExHuobi.Future.Websocket.MarketWs do
+  defmacro __using__(_opts) do
     quote do
       use WebSockex
       require Logger
       import Process, only: [send_after: 3]
+      @endpoint "wss://www.hbdm.com/ws"
 
       def start_link(args \\ %{}) do
-        subscription = args[:subscribe] || ["market.btcusdt.mbp.150"]
+        subscription = args[:subscribe] || ["market.BTC_CQ.depth.size_150.high_freq"]
         opts = consturct_opts(args)
-        endpoint = Map.get(unquote(opts_injected), :endpoint)
 
         state =
           args
-          |> Map.merge(%{
-            subscribe: subscription,
-            heartbeat: 0
-          })
+          |> Map.merge(%{subscribe: subscription})
           |> Map.merge(Map.new(opts))
 
-        WebSockex.start_link(endpoint, __MODULE__, state, opts)
+        WebSockex.start_link(@endpoint, __MODULE__, state, opts)
       end
 
       defp consturct_opts(args) do
@@ -35,7 +32,8 @@ defmodule ExHuobi.MarketWs do
 
       def subscribe(server, topic) do
         message = %{
-          sub: topic
+          sub: topic,
+          data_type: "incremental"
         }
 
         reply_op(server, message)
@@ -46,32 +44,15 @@ defmodule ExHuobi.MarketWs do
         reply_op(server, message)
       end
 
-      defp ping(server, ts) do
-        message = %{ping: ts}
-        reply_op(server, message)
-      end
-
       defp reply_op(server, msg) do
         json = Jason.encode!(msg)
         send(server, {:ws_reply, {:text, json}})
-      end
-
-      defp inc_heartbeat(%{heartbeat: heartbeat} = state) do
-        Map.put(state, :heartbeat, heartbeat + 1)
       end
 
       @impl true
       def handle_connect(_conn, state) do
         Logger.info("Connected!")
         send(self(), :subscribe)
-        send(self(), :init_timer)
-        {:ok, state}
-      end
-
-      @impl true
-      def handle_info({:ping, ts}, state) do
-        %{heartbeat: inc} = inc_heartbeat(state)
-        ping(self(), ts + inc)
         {:ok, state}
       end
 
@@ -82,33 +63,9 @@ defmodule ExHuobi.MarketWs do
       end
 
       @impl true
-      def handle_info(:check_timer, state) do
-        case Map.get(state, :timer_ref) |> Process.read_timer() do
-          false ->
-            {:close, state}
-
-          _ ->
-            send_after(self(), :check_timer, 1_000)
-            {:ok, state}
-        end
-      end
-
-      @impl true
-      def handle_info(:init_timer, state) do
-        {:ok, Map.put(state, :timer_ref, send_after(self(), :done_timer, 5_000))}
-      end
-
-      @impl true
-      def handle_info(:done_timer, state) do
-        {:ok, state}
-      end
-
-      @impl true
       def handle_info(:subscribe, state) do
         topics = Map.get(state, :subscribe)
         Enum.each(topics, &subscribe(self(), &1))
-        send_after(self(), {:ping, 0}, 1_000)
-        send_after(self(), :check_timer, 1_000)
         {:ok, state}
       end
 
@@ -124,10 +81,6 @@ defmodule ExHuobi.MarketWs do
         case Jason.decode(msg) do
           {:ok, %{"ping" => ts}} ->
             send_after(self(), {:pong, ts}, 5_000)
-
-          {:ok, %{"pong" => ts} = payload} ->
-            send(self(), :init_timer)
-            send_after(self(), {:ping, ts}, 2_000)
 
           {:ok, payload} ->
             handle_response(payload, state)
