@@ -51,13 +51,31 @@ defmodule ExHuobi.Util do
     end
   end
 
-  defp sign_content(key, content) do
+  def sign_content(key, content) do
     :crypto.hmac(
       :sha256,
       key,
       content
     )
     |> Base.encode64()
+  end
+
+  def get_authen_ws_message(config, endpoint) do
+    %{api_key: api_key, api_secret: api_secret} = ExHuobi.Config.get(config)
+    %{host: host, path: path} = URI.parse(endpoint)
+    time = ExHuobi.Util.get_timestamp()
+    default_text_to_sign = get_default_text_to_sign(api_key, time) |> URI.encode_query()
+    content = "GET" <> "\n" <> host <> "\n" <> path <> "\n" <> default_text_to_sign
+    signature = sign_content(api_secret, content)
+
+    %{
+      op: "auth",
+      AccessKeyId: api_key,
+      SignatureMethod: "HmacSHA256",
+      SignatureVersion: "2",
+      Timestamp: time,
+      Signature: signature
+    }
   end
 
   def get_timestamp do
@@ -76,6 +94,15 @@ defmodule ExHuobi.Util do
       "SignatureMethod" => "HmacSHA256",
       "SignatureVersion" => 2,
       "Timestamp" => get_timestamp()
+    }
+  end
+
+  defp get_default_text_to_sign(api_key, time) do
+    %{
+      "AccessKeyId" => api_key,
+      "SignatureMethod" => "HmacSHA256",
+      "SignatureVersion" => 2,
+      "Timestamp" => time
     }
   end
 end
