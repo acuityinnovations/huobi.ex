@@ -5,7 +5,6 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
       require Logger
       import Process, only: [send_after: 3]
       @endpoint "wss://api.huobi.pro/ws"
-      @get_snapshot_delay_time 2000
 
       def start_link(args \\ %{}) do
         subscription = args[:subscribe] || ["market.btcusdt.mbp.150"]
@@ -42,6 +41,10 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
         reply_op(server, message)
       end
 
+      def request_snaphost(pid) do
+        send(pid, :subscribe_snapshot)
+      end
+
       def subscribe_snapshot(server, topic) do
         message = %{
           req: topic
@@ -73,7 +76,6 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
       def handle_connect(_conn, state) do
         Logger.info("Connected!")
         send(self(), :subscribe_delta)
-        send_after(self(), :subscribe_snapshot, @get_snapshot_delay_time)
         send(self(), :init_timer)
         {:ok, state}
       end
@@ -142,7 +144,7 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
           {:ok, %{"ping" => ts}} ->
             send_after(self(), {:pong, ts}, 5_000)
 
-          {:ok, %{"pong" => ts} = payload} ->
+          {:ok, %{"pong" => ts}} ->
             send(self(), :init_timer)
             send_after(self(), {:ping, ts}, 2_000)
 
