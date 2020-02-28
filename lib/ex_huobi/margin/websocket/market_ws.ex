@@ -41,7 +41,7 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
         reply_op(server, message)
       end
 
-      def request_snaphost(pid) do
+      def request_snapshot(pid) do
         send(pid, :subscribe_snapshot)
       end
 
