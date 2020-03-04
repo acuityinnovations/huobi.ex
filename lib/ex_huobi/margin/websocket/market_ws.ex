@@ -8,12 +8,14 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
 
       def start_link(args \\ %{}) do
         subscription = args[:subscribe] || ["market.btcusdt.mbp.150"]
+        bbo_subscription = args[:bbo_subscribe] || ["market.btcusdt.bbo"]
         opts = consturct_opts(args)
 
         state =
           args
           |> Map.merge(%{
             subscribe: subscription,
+            bbo_subscribe: bbo_subscription,
             heartbeat: 0
           })
           |> Map.merge(Map.new(opts))
@@ -117,7 +119,7 @@ defmodule ExHuobi.Margin.WebSocket.MarketWs do
 
       @impl true
       def handle_info(:subscribe_delta, state) do
-        topics = Map.get(state, :subscribe)
+        topics = Map.get(state, :subscribe) ++ Map.get(state, :bbo_subscribe)
         Enum.each(topics, &subscribe_delta(self(), &1))
         send_after(self(), {:ping, 0}, 1_000)
         send_after(self(), :check_timer, 1_000)
