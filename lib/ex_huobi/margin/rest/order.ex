@@ -67,17 +67,14 @@ defmodule ExHuobi.Margin.Rest.Order do
   def bulk_create(params, config) do
     case HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config)
          |> Handler.parse_response() do
-      {:ok, data} ->
-        {:ok, data |> add_id() |> parse_to_obj()}
-
-      {:error, _} = error ->
-        error
+      {:ok, data} -> {:ok, data}
+      {:error, _} = error -> error
     end
   end
 
-  defp add_id(data) do
-    data |> Enum.map(fn el -> Map.put(el, "id", el["order-id"]) end)
-  end
+  # defp add_id(data) do
+  #   data |> Enum.map(fn el -> Map.put(el, "id", el["order-id"]) end)
+  # end
 
   @doc """
   Get open orders.
