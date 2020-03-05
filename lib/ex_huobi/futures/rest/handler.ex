@@ -22,7 +22,7 @@ defmodule ExHuobi.Futures.Rest.Handler do
       end
     else
       case Jason.decode(body) do
-        {:ok, json} -> {:ok, json, status_code}
+        {:ok, json} -> {:error, json, status_code}
         {:error, _} -> {:error, body, status_code}
       end
     end

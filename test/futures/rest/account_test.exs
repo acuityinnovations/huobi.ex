@@ -3,54 +3,50 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  @config %ExHuobi.Config{
-    api_key: System.get_env("HUOBI_API_KEY"),
-    api_secret: System.get_env("HUOBI_API_SECRET")
-  }
+  # @config %ExHuobi.Config{
+  #   api_key: System.get_env("HUOBI_API_KEY"),
+  #   api_secret: System.get_env("HUOBI_API_SECRET")
+  # }
 
   setup_all do
-    System.put_env("HUOBI_API_KEY", "12343")
-    System.put_env("HUOBI_API_SECRET", "12345")
     HTTPoison.start()
-  end
 
-  test "do somethign here" do
-    response = [
-      %{
-        "adjust_factor" => 0.15,
-        "is_debit" => 0,
-        "lever_rate" => 20,
-        "liquidation_price" => nil,
-        "margin_available" => 0.01,
-        "margin_balance" => 0.01,
-        "margin_frozen" => 0.0,
-        "margin_position" => 0,
-        "margin_static" => 0.01,
-        "profit_real" => 0.0,
-        "profit_unreal" => 0,
-        "risk_rate" => nil,
-        "symbol" => "BTC",
-        "withdraw_available" => 0.01
+    %{
+      config: %ExHuobi.Config{
+        api_key: "12345",
+        api_secret: "12345"
       }
-    ]
-
-    Jason.encode(response) |> IO.inspect()
+    }
   end
 
-  test "should return account information with leverage" do
+  test "should return account information with leverage", %{config: config} do
     use_cassette("/futures/account/get_account_info_success") do
-      config = %ExHuobi.Config{
-        api_key: "3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14",
-        api_secret: "94472b76-30a703ac-e75d7396-c34a0"
-      }
-
-      ExHuobi.Futures.Rest.Account.get_account_info("BTC", config) |> IO.inspect()
+      assert ExHuobi.Futures.Rest.Account.get_account_info("BTC", config) ==
+               {:ok,
+                [
+                  %ExHuobi.Futures.AccountInfo{
+                    adjust_factor: 0.15,
+                    is_debit: 0,
+                    lever_rate: 20,
+                    liquidation_price: nil,
+                    margin_available: 0.01,
+                    margin_balance: 0.01,
+                    margin_frozen: 0.0,
+                    margin_position: 0,
+                    margin_static: 0.01,
+                    profit_real: 0.0,
+                    profit_unreal: 0,
+                    risk_rate: nil,
+                    symbol: "BTC",
+                    withdraw_available: 0.01
+                  }
+                ]}
     end
   end
 
-  test "should return position" do
+  test "should return position", %{config: config} do
     use_cassette("/futures/account/get_position_success") do
-      assert ExHuobi.Futures.Rest.Account.get_position("BTC", @config) ==
+      assert ExHuobi.Futures.Rest.Account.get_position("BTC", config) ==
                {:ok,
                 [
                   %{
@@ -74,9 +70,9 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
     end
   end
 
-  test "should return error when have problem" do
+  test "should return error when have problem", %{config: config} do
     use_cassette("/futures/account/get_position_error") do
-      assert ExHuobi.Futures.Rest.Account.get_position("BTC", @config) ==
+      assert ExHuobi.Futures.Rest.Account.get_position("BTC", config) ==
                {:error,
                 %{
                   "err_code" => 403,

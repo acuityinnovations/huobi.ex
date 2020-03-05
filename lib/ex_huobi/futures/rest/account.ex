@@ -29,9 +29,6 @@ defmodule ExHuobi.Futures.Rest.Account do
       config
     )
     |> Handler.parse_response()
-    |> case do
-      {:ok, data} -> Util.parse_to_struct(data, AccountInfo)
-      {:error, _} = error -> error
-    end
+    |> Util.transform_response_data(AccountInfo)
   end
 end
