@@ -14,6 +14,40 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
     HTTPoison.start()
   end
 
+  test "do somethign here" do
+    response = [
+      %{
+        "adjust_factor" => 0.15,
+        "is_debit" => 0,
+        "lever_rate" => 20,
+        "liquidation_price" => nil,
+        "margin_available" => 0.01,
+        "margin_balance" => 0.01,
+        "margin_frozen" => 0.0,
+        "margin_position" => 0,
+        "margin_static" => 0.01,
+        "profit_real" => 0.0,
+        "profit_unreal" => 0,
+        "risk_rate" => nil,
+        "symbol" => "BTC",
+        "withdraw_available" => 0.01
+      }
+    ]
+
+    Jason.encode(response) |> IO.inspect()
+  end
+
+  test "should return account information with leverage" do
+    use_cassette("/futures/account/get_account_info_success") do
+      config = %ExHuobi.Config{
+        api_key: "3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14",
+        api_secret: "94472b76-30a703ac-e75d7396-c34a0"
+      }
+
+      ExHuobi.Futures.Rest.Account.get_account_info("BTC", config) |> IO.inspect()
+    end
+  end
+
   test "should return position" do
     use_cassette("/futures/account/get_position_success") do
       assert ExHuobi.Futures.Rest.Account.get_position("BTC", @config) ==

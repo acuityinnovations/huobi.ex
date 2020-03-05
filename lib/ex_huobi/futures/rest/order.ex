@@ -72,10 +72,10 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   # ## Examples
 
-  # iex> ExHuobi.Futures.Private.cancel_order({
-  #   "order_id : "1234",
-  #   "symbol": "BTC"
-  # })
+  # iex> ExHuobi.Futures.Private.cancel_order(%{
+  #   "order_id => "1234",
+  #   "symbol" => "BTC"
+  # }, config)
   # """
   @spec cancel_order(map, config) :: {:ok, any} | {:error, any}
   def cancel_order(order, config) do

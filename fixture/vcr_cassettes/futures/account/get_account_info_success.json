@@ -1,0 +1,35 @@
+[
+  {
+    "request": {
+      "body": "{\"symbol\":\"BTC\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_account_info?AccessKeyId=3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-03-05T07%3A52%3A12&Signature=yH8cNA1KR1FeE91rmE/+ZLwPoAs5TkoolMzwYj+CN9U="
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"error\",\"err_code\":403,\"err_msg\":\"Verification failure [校验失败]\",\"ts\":1583394733097}",
+      "headers": {
+        "Date": "Thu, 05 Mar 2020 07:52:13 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "100",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d0828182997896c1c12d9614f68de7dad1583394733; expires=Sat, 04-Apr-20 07:52:13 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "aa22f533466640c09dfbd2246abc999b",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "56f2419969c1dd3a-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

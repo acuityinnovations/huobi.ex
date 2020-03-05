@@ -2,6 +2,7 @@ defmodule ExHuobi.Margin.Rest.Order do
   alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Margin.Order
+  alias ExHuobi.Util
 
   @margin_endpoint "https://api.huobi.pro"
 
@@ -15,16 +16,24 @@ defmodule ExHuobi.Margin.Rest.Order do
           | {:error, {:config_missing, String.t()}}
   @type response :: success_response | failure_response
 
-  @spec get(order_id, config) :: response
-  def get(order_id, config) do
-    case HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config)
-         |> Handler.parse_response() do
-      {:ok, data} ->
-        {:ok, data |> parse_to_obj()}
+  @spec get_order(order_id, config) :: response
+  def get_order(order_id, config) do
+    HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config)
+    |> Handler.parse_response()
+    |> Util.transform_response_data(Order)
+  end
 
-      {:error, _} = error ->
-        error
-    end
+  @doc """
+  Get open orders.
+  ## Examples
+
+    iex> ExHuobi.Margin.Rest.Order.get_open(%{"account-id": 12035991, symbol: "btcusdt"}, config)
+  """
+  @spec get_open_order(params, config) :: response
+  def get_open_order(params, config) do
+    HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config)
+    |> Handler.parse_response()
+    |> Util.transform_response_data(Order)
   end
 
   @doc """
@@ -44,14 +53,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec create(params, config) :: response
   def create(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config)
-         |> Handler.parse_response() do
-      {:ok, data} ->
-        {:ok, %Order{id: data}}
-
-      {:error, _} = error ->
-        error
-    end
+    HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config)
+    |> Handler.parse_response()
   end
 
   @doc """
@@ -65,33 +68,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_create(params, config) :: response
   def bulk_create(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config)
-         |> Handler.parse_response() do
-      {:ok, data} -> {:ok, data}
-      {:error, _} = error -> error
-    end
-  end
-
-  # defp add_id(data) do
-  #   data |> Enum.map(fn el -> Map.put(el, "id", el["order-id"]) end)
-  # end
-
-  @doc """
-  Get open orders.
-  ## Examples
-
-    iex> ExHuobi.Margin.Rest.Order.get_open(%{"account-id": 12035991, symbol: "btcusdt"}, config)
-  """
-  @spec get_open(params, config) :: response
-  def get_open(params, config) do
-    case HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config)
-         |> Handler.parse_response() do
-      {:ok, data} ->
-        {:ok, data |> parse_to_obj()}
-
-      {:error, _} = error ->
-        error
-    end
+    HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config)
+    |> Handler.parse_response()
   end
 
   @doc """
@@ -102,19 +80,13 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec cancel(order_id, config) :: response
   def cancel(order_id, config) do
-    case HTTPClient.post(
-           @margin_endpoint,
-           "/v1/order/orders/#{order_id}/submitcancel",
-           %{},
-           config
-         )
-         |> Handler.parse_response() do
-      {:ok, order_id} ->
-        {:ok, %Order{id: order_id}}
-
-      {:error, _} = error ->
-        error
-    end
+    HTTPClient.post(
+      @margin_endpoint,
+      "/v1/order/orders/#{order_id}/submitcancel",
+      %{},
+      config
+    )
+    |> Handler.parse_response()
   end
 
   @doc """
@@ -125,33 +97,7 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_cancel(params, config) :: response
   def bulk_cancel(params, config) do
-    case HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config)
-         |> Handler.parse_response() do
-      {:ok, _} = data ->
-        data
-
-      {:error, _} = error ->
-        error
-    end
-  end
-
-  defp parse_to_obj(data) when is_list(data) do
-    data
-    |> Enum.map(&to_struct/1)
-  end
-
-  defp parse_to_obj(data) when is_map(data) do
-    data |> to_struct
-  end
-
-  defp to_struct(data) do
-    {:ok, obj} =
-      data
-      |> Mapail.map_to_struct(
-        Order,
-        transformations: [:snake_case]
-      )
-
-    obj
+    HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config)
+    |> Handler.parse_response()
   end
 end
