@@ -16,8 +16,8 @@ defmodule ExHuobi.Margin.Rest.Order do
           | {:error, {:config_missing, String.t()}}
   @type response :: success_response | failure_response
 
-  @spec get_order(order_id, config) :: response
-  def get_order(order_id, config) do
+  @spec get(order_id, config) :: response
+  def get(order_id, config) do
     HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config)
     |> Handler.parse_response()
     |> Util.transform_response_data(Order)
@@ -29,8 +29,8 @@ defmodule ExHuobi.Margin.Rest.Order do
 
     iex> ExHuobi.Margin.Rest.Order.get_open(%{"account-id": 12035991, symbol: "btcusdt"}, config)
   """
-  @spec get_open_order(params, config) :: response
-  def get_open_order(params, config) do
+  @spec get_open(params, config) :: response
+  def get_open(params, config) do
     HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config)
     |> Handler.parse_response()
     |> Util.transform_response_data(Order)

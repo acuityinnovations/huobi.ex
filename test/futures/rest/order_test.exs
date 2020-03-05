@@ -3,18 +3,18 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  @config %ExHuobi.Config{
-    api_key: System.get_env("HUOBI_API_KEY"),
-    api_secret: System.get_env("HUOBI_API_SECRET")
-  }
-
   setup_all do
-    System.put_env("HUOBI_API_KEY", "12343")
-    System.put_env("HUOBI_API_SECRET", "12345")
     HTTPoison.start()
+
+    %{
+      config: %ExHuobi.Config{
+        api_key: "12345",
+        api_secret: "12345"
+      }
+    }
   end
 
-  test "create order success" do
+  test "create order success", %{config: config} do
     use_cassette("/futures/order/create_order_success") do
       order = %{
         "contract_type" => "this_week",
@@ -27,13 +27,13 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
         "volume" => 1
       }
 
-      assert ExHuobi.Futures.Rest.Order.create_order(order, @config) ==
+      assert ExHuobi.Futures.Rest.Order.create_order(order, config) ==
                {:ok,
                 %{"order_id" => 680_494_320_326_811_648, "order_id_str" => "680494320326811648"}}
     end
   end
 
-  test "create order invalid key error" do
+  test "create order invalid key error", %{config: config} do
     use_cassette("/futures/order/create_order_invalid_key_error") do
       order = %{
         "contract_type" => "this_week",
@@ -51,7 +51,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
          "err_code" => error_code,
          "err_msg" => err_msg,
          "status" => status
-       }} = ExHuobi.Futures.Rest.Order.create_order(order, @config)
+       }} = ExHuobi.Futures.Rest.Order.create_order(order, config)
 
       assert error_code == 403
       assert String.starts_with?(err_msg, "Incorrect Access key") == true
@@ -59,7 +59,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
     end
   end
 
-  test "create order verification error" do
+  test "create order verification error", %{config: config} do
     use_cassette("/futures/order/create_order_vf_error") do
       order = nil
 
@@ -68,7 +68,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
          "err_code" => error_code,
          "err_msg" => err_msg,
          "status" => status
-       }} = ExHuobi.Futures.Rest.Order.create_order(order, @config)
+       }} = ExHuobi.Futures.Rest.Order.create_order(order, config)
 
       assert error_code == 403
       assert String.starts_with?(err_msg, "Verification failure") == true
@@ -76,7 +76,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
     end
   end
 
-  test "create order abnormal service error" do
+  test "create order abnormal service error", %{config: config} do
     use_cassette("/futures/order/create_order_abnormal_service_error") do
       order = nil
 
@@ -85,7 +85,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
          "err_code" => error_code,
          "err_msg" => err_msg,
          "status" => status
-       }} = ExHuobi.Futures.Rest.Order.create_order(order, @config)
+       }} = ExHuobi.Futures.Rest.Order.create_order(order, config)
 
       assert error_code == 1030
       assert String.starts_with?(err_msg, "Abnormal service.") == true
@@ -93,7 +93,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
     end
   end
 
-  test "create order insufficient margin error" do
+  test "create order insufficient margin error", %{config: config} do
     use_cassette("/futures/order/create_order_insufficient_margin_error") do
       order = nil
 
@@ -102,7 +102,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
          "err_code" => error_code,
          "err_msg" => err_msg,
          "status" => status
-       }} = ExHuobi.Futures.Rest.Order.create_order(order, @config)
+       }} = ExHuobi.Futures.Rest.Order.create_order(order, config)
 
       assert error_code == 1047
       assert String.starts_with?(err_msg, "Insufficient margin available.") == true

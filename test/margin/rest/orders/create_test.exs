@@ -6,15 +6,15 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
 
   setup_all do
     HTTPoison.start()
-    :ok
+    %{
+      config: %ExHuobi.Config{
+        api_key: "12345",
+        api_secret: "12345"
+      }
+    }
   end
 
-  @config %ExHuobi.Config{
-    api_key: System.get_env("HUOBI_API_KEY"),
-    api_secret: System.get_env("HUOBI_API_SECRET")
-  }
-
-  test "create order" do
+  test "create order", %{config: config} do
     use_cassette "rest/orders/create", custom: true do
       return_id = "70646394808"
 
@@ -27,12 +27,12 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         source: "super-margin-api"
       }
 
-      {:ok, order} = Rest.create(params, @config)
-      assert return_id == order.id
+      {:ok, order} = Rest.create(params, config)
+      assert order == return_id
     end
   end
 
-  test "create order batch" do
+  test "create order batch", %{config: config} do
     use_cassette "rest/orders/bulk_create", custom: true do
       params = [
         %{
@@ -53,7 +53,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         }
       ]
 
-      {:ok, orders} = Rest.bulk_create(params, @config)
+      {:ok, orders} = Rest.bulk_create(params, config)
       assert length(orders) == 2
     end
   end

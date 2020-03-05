@@ -1,6 +1,6 @@
 defmodule ExHuobi.Margin.Rest.Account do
   alias ExHuobi.Rest.HTTPClient
-  alias ExHuobi.Margin.Account
+  alias ExHuobi.Margin.Account, as: AccountModel
   alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Util
 
@@ -18,6 +18,8 @@ defmodule ExHuobi.Margin.Rest.Account do
   def get(config) do
     HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config)
     |> Handler.parse_response()
-    |> Util.transform_response_data(Account)
+    |> Util.transform_response_data(AccountModel)
   end
+
+
 end
