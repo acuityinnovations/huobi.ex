@@ -1,0 +1,39 @@
+[
+  {
+    "request": {
+      "body": "{\"symbol\":\"BTC\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_account_info?AccessKeyId=3c8dd81a-d8b5e97e-qv2d5ctgbn-9bd14&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-03-05T09%3A09%3A29&Signature=A1UeDB3V0u8qn8fNqrQ/hceiBZMA7Q5toG0vHuuJzR0="
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"margin_balance\":0.010000000000000000,\"margin_position\":0,\"margin_frozen\":0E-18,\"margin_available\":0.010000000000000000,\"profit_real\":0E-18,\"profit_unreal\":0,\"risk_rate\":null,\"withdraw_available\":0.010000000000000000,\"liquidation_price\":null,\"lever_rate\":20,\"adjust_factor\":0.150000000000000000,\"margin_static\":0.010000000000000000,\"is_debit\":0}],\"ts\":1583399370319}",
+      "headers": {
+        "Date": "Thu, 05 Mar 2020 09:09:30 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "405",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d07a3256387890ea89a9fa25fc5e217d61583399370; expires=Sat, 04-Apr-20 09:09:30 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "a2400100c4814c5c932c0862f12627ff",
+        "ratelimit-remaining": "9",
+        "ratelimit-reset": "1583399371318",
+        "ratelimit-interval": "1000",
+        "ratelimit-limit": "10",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "56f2b2d0296cc3b3-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

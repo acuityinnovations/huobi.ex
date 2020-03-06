@@ -1,6 +1,9 @@
 defmodule ExHuobi.Futures.Rest.Handler do
+  @moduledoc false
+
   @spec parse_response({:error, HTTPoison.Error.t()} | {:ok, HTTPoison.Response.t()}) ::
           {:error, any} | {:ok, any}
+  @doc false
   def parse_response(response) do
     case response do
       {:ok, %HTTPoison.Response{body: body, status_code: status_code}} ->
@@ -19,7 +22,7 @@ defmodule ExHuobi.Futures.Rest.Handler do
       end
     else
       case Jason.decode(body) do
-        {:ok, json} -> {:ok, json, status_code}
+        {:ok, json} -> {:error, json, status_code}
         {:error, _} -> {:error, body, status_code}
       end
     end

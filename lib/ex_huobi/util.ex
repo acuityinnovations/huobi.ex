@@ -105,4 +105,31 @@ defmodule ExHuobi.Util do
       "Timestamp" => time
     }
   end
+
+  def transform_response_data(response, module) do
+    case response do
+      {:ok, data} -> {:ok, data |> parse_to_struct(module)}
+      {:error, error} -> {:error, error}
+    end
+  end
+
+  defp parse_to_struct(data, module) when is_list(data) do
+    data
+    |> Enum.map(&to_struct(&1, module))
+  end
+
+  defp parse_to_struct(data, module) when is_map(data) do
+    data |> to_struct(module)
+  end
+
+  defp to_struct(data, module) do
+    {:ok, obj} =
+      data
+      |> Mapail.map_to_struct(
+        module,
+        transformations: [:snake_case]
+      )
+
+    obj
+  end
 end

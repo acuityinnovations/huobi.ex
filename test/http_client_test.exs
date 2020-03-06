@@ -4,8 +4,8 @@ defmodule ExHuobi.Rest.HTTPClientTest do
   doctest ExHuobi.Rest.HTTPClient
 
   @config %ExHuobi.Config{
-    api_key: System.get_env("HUOBI_API_KEY"),
-    api_secret: System.get_env("HUOBI_API_SECRET")
+    api_key: "12345",
+    api_secret: "12345"
   }
 
   describe "test helper functions in http client" do

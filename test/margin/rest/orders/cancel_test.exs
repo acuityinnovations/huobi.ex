@@ -6,27 +6,27 @@ defmodule ExHuobi.Rest.Orders.CancelTest do
 
   setup_all do
     HTTPoison.start()
-    :ok
+    %{
+      config: %ExHuobi.Config{
+        api_key: "12345",
+        api_secret: "12345"
+      }
+    }
   end
 
-  @config %ExHuobi.Config{
-    api_key: System.get_env("HUOBI_API_KEY"),
-    api_secret: System.get_env("HUOBI_API_SECRET")
-  }
-
-  test "cancel order" do
+  test "cancel order", %{config: config} do
     use_cassette "rest/orders/cancel", custom: true do
       cancel_id = "70662287304"
-      {:ok, order} = Rest.cancel(cancel_id, @config)
-      assert cancel_id == order.id
+      {:ok, order} = Rest.cancel(cancel_id, config)
+      assert cancel_id == order
     end
   end
 
-  test "cancel order batch" do
+  test "cancel order batch", %{config: config} do
     use_cassette "rest/orders/bulk_cancel", custom: true do
       params = %{"order-id": ["70664141188", "70664141185"]}
 
-      {:ok, data} = Rest.bulk_cancel(params, @config)
+      {:ok, data} = Rest.bulk_cancel(params, config)
       assert length(data["success"]) == 2
     end
   end

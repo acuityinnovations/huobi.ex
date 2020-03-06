@@ -1,7 +1,8 @@
 defmodule ExHuobi.Margin.Rest.Account do
   alias ExHuobi.Rest.HTTPClient
-  alias ExHuobi.Margin.Account
+  alias ExHuobi.Margin.Account, as: AccountModel
   alias ExHuobi.Margin.Rest.Handler
+  alias ExHuobi.Util
 
   @margin_endpoint "https://api.huobi.pro"
 
@@ -15,33 +16,9 @@ defmodule ExHuobi.Margin.Rest.Account do
 
   @spec get(config) :: response
   def get(config) do
-    case HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config)
-         |> Handler.parse_response() do
-      {:ok, data} ->
-        {:ok, data |> parse_to_obj()}
-
-      {:error, error} ->
-        {:error, error}
-    end
-  end
-
-  defp parse_to_obj(data) when is_list(data) do
-    data
-    |> Enum.map(&to_struct/1)
-  end
-
-  defp parse_to_obj(data) when is_map(data) do
-    data |> to_struct
-  end
-
-  defp to_struct(data) do
-    {:ok, obj} =
-      data
-      |> Mapail.map_to_struct(
-        Account,
-        transformations: [:snake_case]
-      )
-
-    obj
+    @margin_endpoint
+    |> HTTPClient.get("/v1/account/accounts", config)
+    |> Handler.parse_response()
+    |> Util.transform_response_data(AccountModel)
   end
 end
