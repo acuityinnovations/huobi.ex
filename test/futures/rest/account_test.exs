@@ -3,11 +3,6 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  # @config %ExHuobi.Config{
-  #   api_key: System.get_env("HUOBI_API_KEY"),
-  #   api_secret: System.get_env("HUOBI_API_SECRET")
-  # }
-
   setup_all do
     HTTPoison.start()
 

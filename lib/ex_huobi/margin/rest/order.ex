@@ -18,7 +18,8 @@ defmodule ExHuobi.Margin.Rest.Order do
 
   @spec get(order_id, config) :: response
   def get(order_id, config) do
-    HTTPClient.get(@margin_endpoint, "/v1/order/orders/#{order_id}", config)
+    @margin_endpoint
+    |> HTTPClient.get("/v1/order/orders/#{order_id}", config)
     |> Handler.parse_response()
     |> Util.transform_response_data(Order)
   end
@@ -31,7 +32,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec get_open(params, config) :: response
   def get_open(params, config) do
-    HTTPClient.get(@margin_endpoint, "/v1/order/openOrders", params, config)
+    @margin_endpoint
+    |> HTTPClient.get("/v1/order/openOrders", params, config)
     |> Handler.parse_response()
     |> Util.transform_response_data(Order)
   end
@@ -53,7 +55,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec create(params, config) :: response
   def create(params, config) do
-    HTTPClient.post(@margin_endpoint, "/v1/order/orders/place", params, config)
+    @margin_endpoint
+    |> HTTPClient.post("/v1/order/orders/place", params, config)
     |> Handler.parse_response()
   end
 
@@ -68,7 +71,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_create(params, config) :: response
   def bulk_create(params, config) do
-    HTTPClient.post(@margin_endpoint, "/v1/order/batch-orders", params, config)
+    @margin_endpoint
+    |> HTTPClient.post("/v1/order/batch-orders", params, config)
     |> Handler.parse_response()
   end
 
@@ -80,8 +84,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec cancel(order_id, config) :: response
   def cancel(order_id, config) do
-    HTTPClient.post(
-      @margin_endpoint,
+    @margin_endpoint
+    |> HTTPClient.post(
       "/v1/order/orders/#{order_id}/submitcancel",
       %{},
       config
@@ -97,7 +101,8 @@ defmodule ExHuobi.Margin.Rest.Order do
   """
   @spec bulk_cancel(params, config) :: response
   def bulk_cancel(params, config) do
-    HTTPClient.post(@margin_endpoint, "/v1/order/orders/batchcancel", params, config)
+    @margin_endpoint
+    |> HTTPClient.post("/v1/order/orders/batchcancel", params, config)
     |> Handler.parse_response()
   end
 end

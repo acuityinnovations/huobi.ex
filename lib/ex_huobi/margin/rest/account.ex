@@ -16,10 +16,9 @@ defmodule ExHuobi.Margin.Rest.Account do
 
   @spec get(config) :: response
   def get(config) do
-    HTTPClient.get(@margin_endpoint, "/v1/account/accounts", config)
+    @margin_endpoint
+    |> HTTPClient.get("/v1/account/accounts", config)
     |> Handler.parse_response()
     |> Util.transform_response_data(AccountModel)
   end
-
-
 end
