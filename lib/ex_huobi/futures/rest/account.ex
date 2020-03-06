@@ -23,7 +23,7 @@ defmodule ExHuobi.Futures.Rest.Account do
   @spec get_account_info(String.t(), ExHuobi.Config.t()) :: {:error, any} | {:ok, any}
   def get_account_info(instrument_id, config) do
     @hbdm_host
-    HTTPClient.post(
+    |> HTTPClient.post(
       "/api/v1/contract_account_info",
       %{"symbol" => instrument_id},
       config
