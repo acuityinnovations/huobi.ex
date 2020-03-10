@@ -3,10 +3,7 @@ defmodule ExHuobi.Rest.HTTPClientTest do
   alias ExHuobi.Util
   doctest ExHuobi.Rest.HTTPClient
 
-  @config %ExHuobi.Config{
-    api_key: "12345",
-    api_secret: "12345"
-  }
+  @config nil
 
   describe "test helper functions in http client" do
     test "timestamp should return correct format" do

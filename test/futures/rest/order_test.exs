@@ -6,12 +6,7 @@ defmodule ExHuobi.Futures.Rest.Order.Test do
   setup_all do
     HTTPoison.start()
 
-    %{
-      config: %ExHuobi.Config{
-        api_key: "12345",
-        api_secret: "12345"
-      }
-    }
+    %{config: nil}
   end
 
   test "create order success", %{config: config} do
