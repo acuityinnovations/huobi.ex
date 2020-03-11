@@ -63,6 +63,7 @@ defmodule ExHuobi.Util do
       content
     )
     |> Base.encode64()
+    |> URI.encode_www_form()
   end
 
   def get_authen_ws_message(config, endpoint) do
