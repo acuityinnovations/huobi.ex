@@ -8,7 +8,7 @@ defmodule ExHuobi.Margin.Rest.Order do
 
   @type order_id :: integer
   @type params :: map | [map]
-  @type config :: ExHuobi.Config.t()
+  @type config :: map
   @type success_response :: {:ok, String.t()} | {:ok, Order.t()} | {:ok, [Order.t()]}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}

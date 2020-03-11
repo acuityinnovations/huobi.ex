@@ -64,10 +64,7 @@ ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]}
 
 ## Futures Exchange API
 ```elixir
-config = %ExHuobi.Config{
-  api_key: System.get_env("HUOBI_API_KEY"),
-  api_secret: System.get_env("HUOBI_API_SECRET")
-}
+config = %{access_keys: ["XXX_HUOBI_API_KEY", "XXX_HUOBI_SECRET_KEY"]}
 # Get account position
 
 symbol = "BTC|ETH..."

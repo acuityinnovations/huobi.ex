@@ -4,7 +4,7 @@ defmodule ExHuobi.Futures.Rest.Account do
   alias ExHuobi.Util
   alias ExHuobi.Futures.AccountInfo
 
-  @type config :: ExHuobi.Config.t()
+  @type config :: map
   @type position :: map
 
   @hbdm_host "https://api.hbdm.com"
@@ -20,7 +20,7 @@ defmodule ExHuobi.Futures.Rest.Account do
     |> Handler.parse_response()
   end
 
-  @spec get_account_info(String.t(), ExHuobi.Config.t()) :: {:error, any} | {:ok, any}
+  @spec get_account_info(String.t(), config) :: {:error, any} | {:ok, any}
   def get_account_info(instrument_id, config) do
     @hbdm_host
     |> HTTPClient.post(
