@@ -10,7 +10,7 @@ by adding `ex_huobi` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_huobi, "~> 0.1.3"}
+    {:ex_huobi, "~> 0.1.5"}
   ]
 end
 ```
@@ -23,10 +23,7 @@ be found at [https://hexdocs.pm/ex_huobi](https://hexdocs.pm/ex_huobi).
 ## Margin Rest API Usage
 
 ```elixir
-config = %ExHuobi.Config{
-  api_key: System.get_env("HUOBI_API_KEY"),
-  api_secret: System.get_env("HUOBI_API_SECRET")
-}
+config = %{access_keys: ["XXX_HUOBI_API_KEY", "XXX_HUOBI_SECRET_KEY"]}
 
 # Single API
 
@@ -67,10 +64,7 @@ ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]}
 
 ## Futures Exchange API
 ```elixir
-config = %ExHuobi.Config{
-  api_key: System.get_env("HUOBI_API_KEY"),
-  api_secret: System.get_env("HUOBI_API_SECRET")
-}
+config = %{access_keys: ["XXX_HUOBI_API_KEY", "XXX_HUOBI_SECRET_KEY"]}
 # Get account position
 
 symbol = "BTC|ETH..."

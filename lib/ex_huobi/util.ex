@@ -15,12 +15,13 @@ defmodule ExHuobi.Util do
       verb_to_sign = unquote(verb) |> Atom.to_string() |> Kernel.<>("\n")
       host_to_sign = unquote(base_url) |> URI.parse() |> Map.get(:host) |> Kernel.<>("\n")
       base_resource_to_sign = unquote(path) |> Kernel.<>("\n")
+      %{api_secret: api_secret} = ExHuobi.Config.get(unquote(config))
 
       text_to_sign = unquote(yield)
 
       signature =
         sign_content(
-          unquote(config).api_secret,
+          api_secret,
           verb_to_sign <> host_to_sign <> base_resource_to_sign <> text_to_sign
         )
 
@@ -32,7 +33,9 @@ defmodule ExHuobi.Util do
   @spec prepare_request(verb, base_url, path, config) :: response
   def prepare_request(verb, base_url, path, config) do
     prepare_common(verb, base_url, path, config) do
-      config.api_key
+      %{api_key: api_key} = ExHuobi.Config.get(config)
+
+      api_key
       |> get_default_text_to_sign()
       |> URI.encode_query()
     end
@@ -41,8 +44,10 @@ defmodule ExHuobi.Util do
   @spec prepare_request(verb, base_url, path, params, config) :: response
   def prepare_request(verb, base_url, path, params, config) do
     prepare_common(verb, base_url, path, config) do
+      %{api_key: api_key} = ExHuobi.Config.get(config)
+
       default_text_to_sign =
-        config.api_key
+        api_key
         |> get_default_text_to_sign()
         |> URI.encode_query()
 
