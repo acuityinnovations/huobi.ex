@@ -20,7 +20,7 @@ defmodule ExHuobi.Util do
       text_to_sign = unquote(yield)
 
       signature =
-        sign_content(
+        sign_content_for_rest(
           api_secret,
           verb_to_sign <> host_to_sign <> base_resource_to_sign <> text_to_sign
         )
@@ -56,7 +56,16 @@ defmodule ExHuobi.Util do
     end
   end
 
-  def sign_content(key, content) do
+  def sign_content_for_ws(key, content) do
+    :crypto.hmac(
+      :sha256,
+      key,
+      content
+    )
+    |> Base.encode64()
+  end
+
+  def sign_content_for_rest(key, content) do
     :crypto.hmac(
       :sha256,
       key,
@@ -72,7 +81,7 @@ defmodule ExHuobi.Util do
     time = ExHuobi.Util.get_timestamp()
     default_text_to_sign = get_default_text_to_sign(api_key, time) |> URI.encode_query()
     content = "GET" <> "\n" <> host <> "\n" <> path <> "\n" <> default_text_to_sign
-    signature = sign_content(api_secret, content)
+    signature = sign_content_for_ws(api_secret, content)
 
     %{
       op: "auth",
