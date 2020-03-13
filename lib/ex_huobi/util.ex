@@ -1,13 +1,11 @@
 defmodule ExHuobi.Util do
   @moduledoc false
 
-  alias ExHuobi.Config
-
   @type verb :: :GET | :POST
   @type base_url :: String.t()
   @type path :: String.t()
   @type params :: map
-  @type config :: Config.t() | nil
+  @type config :: map | nil
   @type response :: String.t()
 
   defmacro prepare_common(verb, base_url, path, config, do: yield) do

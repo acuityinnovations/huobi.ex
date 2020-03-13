@@ -5,7 +5,7 @@ defmodule ExHuobi.Rest.HTTPClient do
   @type base_url :: String.t()
   @type path :: String.t()
   @type params :: map | [map]
-  @type config :: map
+  @type config :: map | nil
   @type success_response :: {:ok, any}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}

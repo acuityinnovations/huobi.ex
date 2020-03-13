@@ -9,11 +9,11 @@ defmodule ExHuobi.Futures.Rest.Account do
 
   @hbdm_host "https://api.hbdm.com"
 
-  @spec get_position(String.t(), config) :: {:error, any} | {:ok, any}
-  def get_position(instrument_id, config) do
+  @spec get_positions(String.t(), config) :: {:error, any} | {:ok, any}
+  def get_positions(instrument_id, config) do
     @hbdm_host
     |> HTTPClient.post(
-      "/api/v1/contract_position_info",
+      "/api/v1/contract_account_position_info",
       %{"symbol" => instrument_id},
       config
     )
