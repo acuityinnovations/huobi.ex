@@ -8,7 +8,7 @@ defmodule ExHuobi.Margin.Rest.Account do
 
   @type params :: map
   @type config :: map
-  @type success_response :: {:ok, integer} | {:ok, Account.t()} | {:ok, [Account.t()]}
+  @type success_response :: {:ok, integer} | {:ok, AccountModel.t()} | {:ok, [AccountModel.t()]}
   @type failure_response ::
           {:error, {:poison_decode_error, String.t()}}
           | {:error, {:huobi_error, %{code: String.t(), msg: String.t()}}}

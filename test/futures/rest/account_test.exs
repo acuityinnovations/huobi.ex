@@ -10,33 +10,33 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
   end
 
   test "should return account information with leverage", %{config: config} do
-    use_cassette("/futures/account/get_account_info_success") do
+    use_cassette("futures/account/get_account_info_success") do
       assert ExHuobi.Futures.Rest.Account.get_account_info("BTC", config) ==
                {:ok,
                 [
                   %ExHuobi.Futures.AccountInfo{
-                    adjust_factor: 0.15,
+                    adjust_factor: 0.025,
                     is_debit: 0,
-                    lever_rate: 20,
+                    lever_rate: 5,
                     liquidation_price: nil,
-                    margin_available: 0.01,
-                    margin_balance: 0.01,
-                    margin_frozen: 0.0,
+                    margin_available: 0,
+                    margin_balance: 0,
+                    margin_frozen: 0,
                     margin_position: 0,
-                    margin_static: 0.01,
-                    profit_real: 0.0,
+                    margin_static: 0,
+                    profit_real: 0,
                     profit_unreal: 0,
                     risk_rate: nil,
                     symbol: "BTC",
-                    withdraw_available: 0.01
+                    withdraw_available: 0
                   }
                 ]}
     end
   end
 
   test "should return position", %{config: config} do
-    use_cassette("/futures/account/get_position_success") do
-      assert ExHuobi.Futures.Rest.Account.get_position("BTC", config) ==
+    use_cassette("futures/account/get_position_success") do
+      assert ExHuobi.Futures.Rest.Account.get_positions("BTC", config) ==
                {:ok,
                 [
                   %{
@@ -61,8 +61,8 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
   end
 
   test "should return error when have problem", %{config: config} do
-    use_cassette("/futures/account/get_position_error") do
-      assert ExHuobi.Futures.Rest.Account.get_position("BTC", config) ==
+    use_cassette("futures/account/get_position_error") do
+      assert ExHuobi.Futures.Rest.Account.get_positions("BTC", config) ==
                {:error,
                 %{
                   "err_code" => 403,

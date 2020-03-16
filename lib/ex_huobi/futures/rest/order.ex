@@ -15,9 +15,9 @@ defmodule ExHuobi.Futures.Rest.Order do
   # ## Examples
 
   # iex> ExHuobi.Futures.Private.create_order(
-  #   { symbol: "BTC",
+  #   %{ symbol: "BTC",
   #     contract_type: "this_week",
-  #     volume: 1,
+  #     volume: "0.001",
   #     price: 5000,
   #     direction: "Buy",
   #     lever_rate: 5,
