@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_contract_info?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-03-16T05%3A22%3A05&Signature=3wIfzwIo%2F8ocblYchbCI86ZMih8AvCViljNTjdFO%2Fm0%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC200320\",\"contract_type\":\"this_week\",\"contract_size\":100.000000000000000000,\"price_tick\":0.010000000000000000,\"delivery_date\":\"20200320\",\"create_date\":\"20200306\",\"contract_status\":1},{\"symbol\":\"BTC\",\"contract_code\":\"BTC200327\",\"contract_type\":\"next_week\",\"contract_size\":100.000000000000000000,\"price_tick\":0.010000000000000000,\"delivery_date\":\"20200327\",\"create_date\":\"20191213\",\"contract_status\":1},{\"symbol\":\"BTC\",\"contract_code\":\"BTC200626\",\"contract_type\":\"quarter\",\"contract_size\":100.000000000000000000,\"price_tick\":0.010000000000000000,\"delivery_date\":\"20200626\",\"create_date\":\"20200313\",\"contract_status\":1}],\"ts\":1584336126293}",
+      "headers": {
+        "Date": "Mon, 16 Mar 2020 05:22:06 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=da8316cb53e0e03aea99b8cf61202c6c51584336125; expires=Wed, 15-Apr-20 05:22:05 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Vary": "Accept-Encoding",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "cdeb29e21c0b4ccf8c54ed1e68e34704",
+        "ratelimit-remaining": "59",
+        "ratelimit-reset": "1584336129291",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "60",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "574c08d35ffac6f8-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

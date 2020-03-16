@@ -8,25 +8,29 @@
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "https://api.hbdm.com/api/v1/contract_position_info?AccessKeyId=12343&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-02-23T10%3A56%3A56&Signature=NZ316t2l5KUWMv2vVb7bhB7spJkI5qntU9lUoMg+h7Q="
+      "url": "https://api.hbdm.com/api/v1/contract_account_position_info?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-03-16T05%3A00%3A35&Signature=LCvhK88zaqHtgCN1n2RmFnrgq%2F406jUo8Cr73i3nZUM%3D"
     },
     "response": {
       "binary": false,
-      "body": "{\"data\":[{\"available\":0,\"contract_code\":\"BTC180914\",\"contract_type\":\"this_week\",\"cost_hold\":422.78,\"cost_open\":422.78,\"direction\":\"buy\",\"frozen\":0.3,\"last_price\":7900.17,\"lever_rate\":10,\"position_margin\":3.4,\"profit\":0.97,\"profit_rate\":0.07,\"profit_unreal\":7.096e-5,\"symbol\":\"BTC\",\"volume\":1}],\"status\":\"ok\",\"ts\":158797866555}",
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\", \"lever_rate\": 10, \"profit_unreal\": 7.096e-5, \"available\": 0, \"contract_code\": \"BTC180914\", \"contract_type\": \"this_week\", \"cost_hold\": 422.78, \"cost_open\": 422.78, \"direction\": \"buy\", \"frozen\": 0.3, \"last_price\": 7900.17, \"position_margin\": 3.4, \"profit\": 0.97, \"profit_rate\": 0.07, \"volume\": 1}], \"ts\":1584334836296}",
       "headers": {
-        "Date": "Sun, 23 Feb 2020 10:56:57 GMT",
+        "Date": "Mon, 16 Mar 2020 05:00:36 GMT",
         "Content-Type": "text/plain;charset=UTF-8",
-        "Content-Length": "104",
+        "Content-Length": "322",
         "Connection": "keep-alive",
-        "Set-Cookie": "__cfduid=de759d4bfc2a9b46114ce3bd866cf516c1582455417; expires=Tue, 24-Mar-20 10:56:57 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Set-Cookie": "__cfduid=dcbe54f5346698365ba8f1199b5342c7c1584334835; expires=Wed, 15-Apr-20 05:00:35 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
         "Pragma": "no-cache",
         "Cache-Control": "no-cache, no-store",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
-        "ReqId": "11410c19acea4262a13ba568f5372f7e",
+        "ReqId": "dd27031c19894a549ca24f54733d9c4d",
+        "ratelimit-remaining": "28",
+        "ratelimit-reset": "1584334838213",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "30",
         "CF-Cache-Status": "DYNAMIC",
         "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
         "Server": "cloudflare",
-        "CF-RAY": "5698ad162d83c6e0-SGN"
+        "CF-RAY": "574be954c925c6d8-SGN"
       },
       "status_code": 200,
       "type": "ok"
