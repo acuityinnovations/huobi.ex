@@ -8,7 +8,7 @@ defmodule ExHuobi.Future.Websocket.MarketWs do
 
       def start_link(args \\ %{}) do
         subscription = args[:subscribe] || ["market.BTC_CQ.depth.size_150.high_freq"]
-        opts = consturct_opts(args)
+        opts = construct_opts(args)
 
         state =
           args
@@ -18,7 +18,7 @@ defmodule ExHuobi.Future.Websocket.MarketWs do
         WebSockex.start_link(@endpoint, __MODULE__, state, opts)
       end
 
-      defp consturct_opts(args) do
+      defp construct_opts(args) do
         name = args[:name] || __MODULE__
 
         debug =
