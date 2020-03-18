@@ -63,7 +63,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   @spec create_bulk_orders(list(map), config) :: {:ok, list} | {:error, any}
   def create_bulk_orders(orders, config) do
     @hbdm_host
-    |> HTTPClient.post("/api/v1/contract_order", orders, config)
+    |> HTTPClient.post("/api/v1/contract_batchorder", orders, config)
     |> Handler.parse_response()
   end
 
