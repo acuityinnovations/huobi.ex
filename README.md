@@ -10,7 +10,7 @@ by adding `ex_huobi` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_huobi, "~> 0.1.9"}
+    {:ex_huobi, "~> 0.1.10"}
   ]
 end
 ```
