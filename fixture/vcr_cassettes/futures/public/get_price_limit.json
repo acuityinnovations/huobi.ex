@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/api/v1/contract_price_limit?contract_code=BTC200327"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC200327\",\"contract_type\":\"this_week\",\"high_limit\":6920.740000000000000000000000000000000000,\"low_limit\":6421.430000000000000000000000000000000000}],\"ts\":1584699120235}",
+      "headers": {
+        "Date": "Fri, 20 Mar 2020 10:12:00 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "225",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d4bb801c2decc307d80455efca79029041584699120; expires=Sun, 19-Apr-20 10:12:00 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "a997de328b424251aa4c9a1c01c05807",
+        "ratelimit-remaining": "59",
+        "ratelimit-reset": "1584699123235",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "60",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "576ea6fd299ddd0a-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
