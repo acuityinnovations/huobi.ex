@@ -73,7 +73,7 @@ defmodule ExHuobi.Util do
     |> URI.encode_www_form()
   end
 
-  def get_authen_ws_message(config, endpoint) do
+  def get_authen_ws_message(config, endpoint, is_future? \\ false) do
     %{api_key: api_key, api_secret: api_secret} = ExHuobi.Config.get(config)
     %{host: host, path: path} = URI.parse(endpoint)
     time = ExHuobi.Util.get_timestamp()
@@ -81,7 +81,7 @@ defmodule ExHuobi.Util do
     content = "GET" <> "\n" <> host <> "\n" <> path <> "\n" <> default_text_to_sign
     signature = sign_content_for_ws(api_secret, content)
 
-    %{
+    authen_payload = %{
       op: "auth",
       AccessKeyId: api_key,
       SignatureMethod: "HmacSHA256",
@@ -89,6 +89,12 @@ defmodule ExHuobi.Util do
       Timestamp: time,
       Signature: signature
     }
+
+    if is_future? do
+      Map.put_new(authen_payload, :type, "api")
+    else
+      authen_payload
+    end
   end
 
   def get_timestamp do

@@ -1,7 +1,7 @@
 defmodule ExHuobi.Margin.Rest.Account do
-  alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Margin.Account, as: AccountModel
   alias ExHuobi.Margin.Rest.Handler
+  alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Util
 
   @margin_endpoint "https://api.huobi.pro"
