@@ -39,7 +39,7 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   # ## Examples
 
-  # iex> ExHuobi.Futures.Rest.Order.create_bulk_orders([
+  # iex> ExHuobi.Futures.Rest.Order.create_bulk_orders(%{"orders_data" => [
   #   { symbol: "BTC",
   #     contract_type: "this_week",
   #     volume: 1,
@@ -60,7 +60,7 @@ defmodule ExHuobi.Futures.Rest.Order do
   #   }
   # ])
   # """
-  @spec create_bulk_orders(list(map), config) :: {:ok, list} | {:error, any}
+  @spec create_bulk_orders(map, config) :: {:ok, list} | {:error, any}
   def create_bulk_orders(orders, config) do
     @hbdm_host
     |> HTTPClient.post("/api/v1/contract_batchorder", orders, config)
