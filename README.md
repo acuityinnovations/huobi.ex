@@ -10,7 +10,7 @@ by adding `ex_huobi` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_huobi, "~> 0.1.12"}
+    {:ex_huobi, "~> 0.2.0"}
   ]
 end
 ```
@@ -50,7 +50,7 @@ ExHuobi.Margin.Rest.Order.cancel(70662287304, config)
 # Bulk API
 
 # Create multiple orders
-ExHuobi.Margin.Rest.Order.bulk_create(%{"orders-data" => 
+ExHuobi.Margin.Rest.Order.bulk_create(%{"orders-data" =>
   [
     %{"account-id": 12035991, amount: 0.001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"},
     %{"account-id": 12035991, amount: 0.001, price: 11500 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"}

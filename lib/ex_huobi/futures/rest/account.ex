@@ -1,8 +1,8 @@
 defmodule ExHuobi.Futures.Rest.Account do
-  alias ExHuobi.Rest.HTTPClient
-  alias ExHuobi.Futures.Rest.Handler
-  alias ExHuobi.Util
   alias ExHuobi.Futures.AccountInfo
+  alias ExHuobi.Futures.Rest.Handler
+  alias ExHuobi.Rest.HTTPClient
+  alias ExHuobi.Util
 
   @type config :: map
   @type position :: map

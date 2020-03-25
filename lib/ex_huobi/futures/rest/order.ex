@@ -1,6 +1,6 @@
 defmodule ExHuobi.Futures.Rest.Order do
-  alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Futures.Rest.Handler
+  alias ExHuobi.Rest.HTTPClient
 
   @type params :: map
   @type config :: map
@@ -14,10 +14,10 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   # ## Examples
 
-  # iex> ExHuobi.Futures.Private.create_order(
+  # iex> ExHuobi.Futures.Rest.Order.create_order(
   #   %{ symbol: "BTC",
   #     contract_type: "this_week",
-  #     volume: "0.001",
+  #     volume: 1,
   #     price: 5000,
   #     direction: "Buy",
   #     lever_rate: 5,
@@ -39,7 +39,7 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   # ## Examples
 
-  # iex> ExHuobi.Futures.Private.create_bulk_orders(%{"orders_data" => [
+  # iex> ExHuobi.Futures.Rest.Order.create_bulk_orders(%{"orders_data" => [
   #   { symbol: "BTC",
   #     contract_type: "this_week",
   #     volume: 1,
@@ -74,7 +74,7 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   # ## Examples
 
-  # iex> ExHuobi.Futures.Private.cancel_order(%{
+  # iex> ExHuobi.Futures.Rest.Order.cancel_order(%{
   #   "order_id => "1234",
   #   "symbol" => "BTC"
   # }, config)

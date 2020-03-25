@@ -3,7 +3,7 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
     quote do
       use WebSockex
       require Logger
-      @endpoint "wss://www.hbdm.com/ws"
+      @endpoint "wss://api.hbdm.com/notification"
 
       def start_link(args \\ %{}) do
         subscription = args[:subscribe] || ["orders.btc"]
@@ -30,7 +30,7 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
       end
 
       def authenticate(server, {config, endpoint}) do
-        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint)
+        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint, true)
         reply_op(server, message)
       end
 
@@ -44,7 +44,11 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
       end
 
       def pong(server, ts) do
-        message = %{pong: ts}
+        message = %{
+          op: "pong",
+          ts: ts
+        }
+
         reply_op(server, message)
       end
 
@@ -81,8 +85,7 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
           {:ok, %{"op" => "auth", "err-code" => 0}} ->
             Enum.each(topics, &subscribe(self(), &1))
 
-          {:ok, %{"ping" => ts} = payload} ->
-            handle_response(payload, state)
+          {:ok, %{"op" => "ping", "ts" => ts}} ->
             pong(self(), ts)
 
           {:ok, payload} ->
