@@ -3,6 +3,7 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
     quote do
       use WebSockex
       require Logger
+      import Process, only: [send_after: 3]
       @endpoint "wss://api.hbdm.com/notification"
 
       def start_link(args \\ %{}) do
@@ -57,6 +58,12 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
         send(server, {:ws_reply, {:text, json}})
       end
 
+      defp pong_multiple(server, ts) do
+        send_after(server, {:pong, ts}, 1_000)
+        send_after(server, {:pong, ts}, 2_000)
+        send_after(server, {:pong, ts}, 3_000)
+      end
+
       @impl true
       def handle_connect(_conn, state) do
         Logger.info("Connected!")
@@ -68,6 +75,12 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
       def handle_info(:authenticate, state) do
         config = Map.get(state, :config)
         authenticate(self(), {config, @endpoint})
+        {:ok, state}
+      end
+
+      @impl true
+      def handle_info({:pong, ts}, state) do
+        pong(self(), ts)
         {:ok, state}
       end
 
@@ -86,7 +99,9 @@ defmodule ExHuobi.Future.Websocket.OrderWs do
             Enum.each(topics, &subscribe(self(), &1))
 
           {:ok, %{"op" => "ping", "ts" => ts}} ->
-            pong(self(), ts)
+            pid = self()
+            pong_multiple(pid, ts)
+            handle_response(ts, state)
 
           {:ok, payload} ->
             handle_response(payload, state)

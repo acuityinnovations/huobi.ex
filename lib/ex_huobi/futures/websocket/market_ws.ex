@@ -49,6 +49,12 @@ defmodule ExHuobi.Future.Websocket.MarketWs do
         send(server, {:ws_reply, {:text, json}})
       end
 
+      defp pong_multiple(server, ts) do
+        send_after(server, {:pong, ts}, 1_000)
+        send_after(server, {:pong, ts}, 2_000)
+        send_after(server, {:pong, ts}, 3_000)
+      end
+
       @impl true
       def handle_connect(_conn, state) do
         Logger.info("Connected!")
@@ -80,7 +86,8 @@ defmodule ExHuobi.Future.Websocket.MarketWs do
 
         case Jason.decode(msg) do
           {:ok, %{"ping" => ts}} ->
-            send_after(self(), {:pong, ts}, 5_000)
+            pid = self()
+            pong_multiple(pid, ts)
 
           {:ok, payload} ->
             handle_response(payload, state)
