@@ -5,7 +5,6 @@ defmodule ExHuobi.Future.Websocket.MarketWs do
       require Logger
       import Process, only: [send_after: 3]
       @endpoint "wss://www.hbdm.com/ws"
-      @aws_endpoint ""
 
       def start_link(args \\ %{}) do
         subscription = args[:subscribe] || ["market.BTC_CQ.depth.size_150.high_freq"]
