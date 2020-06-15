@@ -19,6 +19,7 @@ defmodule ExHuobi.Futures.Rest.Handler do
       case Jason.decode!(body) do
         %{"status" => "error"} = error -> {:error, error}
         %{"status" => "ok", "data" => data} -> {:ok, data}
+        %{"status" => "ok", "tick" => data} -> {:ok, data}
       end
     else
       case Jason.decode(body) do

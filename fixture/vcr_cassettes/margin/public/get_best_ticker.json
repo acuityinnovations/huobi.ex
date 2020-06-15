@@ -1,0 +1,31 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.huobi.pro/market/tickers"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"ts\":1592198219365,\"data\":[{\"symbol\":\"tnbbtc\",\"open\":2.116E-7,\"high\":2.12E-7,\"low\":1.986E-7,\"close\":2.021E-7,\"amount\":1.5596854E7,\"vol\":3.2917122351,\"count\":2578,\"bid\":2.004E-7,\"bidSize\":17037.0,\"ask\":2.036E-7,\"askSize\":40994.0},{\"symbol\":\"paybtc\",\"open\":4.98E-6,\"high\":5.01E-6,\"low\":4.87E-6,\"close\":4.87E-6,\"amount\":225627.61162014,\"vol\":1.1282820009,\"count\":1123,\"bid\":4.87E-6,\"bidSize\":2884.51,\"ask\":4.9E-6,\"askSize\":2409.15}]}",
+      "headers": {
+        "Date": "Mon, 15 Jun 2020 05:16:59 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d1f9abe79105be47f866ce5fb09dd8ebf1592198219; expires=Wed, 15-Jul-20 05:16:59 GMT; path=/; domain=.huobi.pro; HttpOnly; SameSite=Lax; Secure",
+        "X-Request-ID": "d06bbacd2f5ebb04f05be811c248e68c",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "035801de300000d05869836200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5a39d276b983d058-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

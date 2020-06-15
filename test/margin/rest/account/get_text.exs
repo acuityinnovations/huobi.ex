@@ -1,5 +1,5 @@
 defmodule ExHuobi.Rest.Account.GetTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias ExHuobi.Margin.Rest.Account, as: Rest

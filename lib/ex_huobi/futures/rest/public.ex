@@ -18,4 +18,9 @@ defmodule ExHuobi.Futures.Rest.Public do
     HTTPoison.get("#{@hbdm_host}/api/v1/contract_price_limit?contract_code=#{instrument_id}")
     |> Handler.parse_response()
   end
+
+  def get_market_depth(instrument) do
+    HTTPoison.get("#{@hbdm_host}/market/depth?symbol=#{instrument}&type=step0")
+    |> Handler.parse_response()
+  end
 end
