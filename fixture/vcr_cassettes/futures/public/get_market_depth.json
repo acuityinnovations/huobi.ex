@@ -1,0 +1,32 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/market/depth?symbol=BTC_CQ&type=step0"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"ch\":\"market.BTC_CQ.depth.step0\",\"status\":\"ok\",\"tick\":{\"asks\":[[9253.66,711],[9254.35,7],[9254.36,79]],\"bids\":[[9253.65,379],[9253.23,20],[9253.09,10]],\"ch\":\"market.BTC_CQ.depth.step0\",\"id\":1592196800,\"mrid\":73995840218,\"ts\":1592196800542,\"version\":1592196800},\"ts\":1592196800571}",
+      "headers": {
+        "Date": "Mon, 15 Jun 2020 04:53:20 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d6d0ed0767855275000157f2c87b8542f1592196800; expires=Wed, 15-Jul-20 04:53:20 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Vary": "Accept-Encoding",
+        "Accept-Language": "en-US",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "0357ec370b0000c70c9e13c200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5a39afd1ac48c70c-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

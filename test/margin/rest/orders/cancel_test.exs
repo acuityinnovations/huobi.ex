@@ -1,5 +1,5 @@
 defmodule ExHuobi.Rest.Orders.CancelTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias ExHuobi.Margin.Rest.Order, as: Rest
