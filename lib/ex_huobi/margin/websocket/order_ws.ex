@@ -105,7 +105,7 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
         {:reconnect, state}
       end
 
-      defoverridable handle_response: 2, handle_disconnect: 2
+      defoverridable handle_connect: 2, handle_response: 2, handle_disconnect: 2
     end
   end
 end
