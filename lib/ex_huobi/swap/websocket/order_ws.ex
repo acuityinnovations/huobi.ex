@@ -1,14 +1,15 @@
-defmodule ExHuobi.Margin.WebSocket.OrderWs do
+defmodule ExHuobi.Swap.Websocket.OrderWs do
   @moduledoc false
 
   defmacro __using__(_opts) do
     quote do
-      @endpoint "wss://api.huobi.pro/ws/v1"
       use WebSockex
+      import Process, only: [send_after: 3]
       require Logger
+      @endpoint "wss://api.hbdm.com/swap-notification"
 
       def start_link(args \\ %{}) do
-        subscription = args[:subscribe] || ["orders.btcusdt.update"]
+        subscription = args[:subscribe] || ["orders.BTC-USD"]
         opts = consturct_opts(args)
 
         state =
@@ -32,7 +33,7 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
       end
 
       def authenticate(server, {config, endpoint}) do
-        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint)
+        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint, true)
         reply_op(server, message)
       end
 

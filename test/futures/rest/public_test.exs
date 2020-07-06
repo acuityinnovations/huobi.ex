@@ -3,13 +3,15 @@ defmodule ExHuobi.Futures.Rest.Public.Test do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
+  alias ExHuobi.Futures.Rest.Public, as: PublicApi
+
   setup_all do
     HTTPoison.start()
   end
 
   test "should return futures instruments" do
     use_cassette("futures/public/get_instruments") do
-      assert ExHuobi.Futures.Rest.Public.instruments() ==
+      assert PublicApi.instruments() ==
                {:ok,
                 [
                   %{
@@ -48,7 +50,7 @@ defmodule ExHuobi.Futures.Rest.Public.Test do
 
   test "should return correct contract instrument info" do
     use_cassette("futures/public/get_instrument") do
-      assert ExHuobi.Futures.Rest.Public.instrument_info("BTC200327") ==
+      assert PublicApi.instrument_info("BTC200327") ==
                {:ok,
                 [
                   %{
@@ -67,7 +69,7 @@ defmodule ExHuobi.Futures.Rest.Public.Test do
 
   test "should return correct high and low price" do
     use_cassette("futures/public/get_price_limit") do
-      assert ExHuobi.Futures.Rest.Public.get_price_limit("BTC200327") ==
+      assert PublicApi.get_price_limit("BTC200327") ==
                {:ok,
                 [
                   %{
@@ -83,16 +85,17 @@ defmodule ExHuobi.Futures.Rest.Public.Test do
 
   test "should return market depth" do
     use_cassette("futures/public/get_market_depth") do
-      assert ExHuobi.Futures.Rest.Public.get_market_depth("BTC_CQ") ==
+      assert PublicApi.get_market_depth("BTC_CQ") ==
                {:ok,
-                %{"asks" => [[9253.66, 711], [9254.35,7], [9254.36,79]],
-                "bids" => [[9253.65, 379], [9253.23,20], [9253.09,10]],
-                "ch" => "market.BTC_CQ.depth.step0",
-                "id" => 1592196800,
-                "mrid" => 73995840218,
-                "ts" => 1592196800542,
-                "version" => 1592196800}
-              }
+                %{
+                  "asks" => [[9253.66, 711], [9254.35, 7], [9254.36, 79]],
+                  "bids" => [[9253.65, 379], [9253.23, 20], [9253.09, 10]],
+                  "ch" => "market.BTC_CQ.depth.step0",
+                  "id" => 1_592_196_800,
+                  "mrid" => 73_995_840_218,
+                  "ts" => 1_592_196_800_542,
+                  "version" => 1_592_196_800
+                }}
     end
   end
 end

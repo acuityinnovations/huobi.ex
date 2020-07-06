@@ -1,4 +1,6 @@
 defmodule ExHuobi.Futures.Rest.Public do
+  @moduledoc false
+
   alias ExHuobi.Futures.Rest.Handler
 
   @hbdm_host "https://api.hbdm.com"

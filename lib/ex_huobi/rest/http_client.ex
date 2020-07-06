@@ -1,4 +1,6 @@
 defmodule ExHuobi.Rest.HTTPClient do
+  @moduledoc false
+
   alias ExHuobi.Util
 
   @type verb :: :GET | :POST

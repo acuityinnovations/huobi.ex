@@ -3,6 +3,8 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
+  alias ExHuobi.Futures.Rest.Account, as: AccountApi
+
   setup_all do
     HTTPoison.start()
 
@@ -11,7 +13,7 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   test "should return account information with leverage", %{config: config} do
     use_cassette("futures/account/get_account_info_success") do
-      assert ExHuobi.Futures.Rest.Account.get_account_info("BTC", config) ==
+      assert AccountApi.get_account_info("BTC", config) ==
                {:ok,
                 [
                   %ExHuobi.Futures.AccountInfo{
@@ -36,7 +38,7 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   test "should return position", %{config: config} do
     use_cassette("futures/account/get_position_success") do
-      assert ExHuobi.Futures.Rest.Account.get_positions("BTC", config) ==
+      assert AccountApi.get_positions("BTC", config) ==
                {:ok,
                 [
                   %{
@@ -62,7 +64,7 @@ defmodule ExHuobi.Futures.Rest.Account.Test do
 
   test "should return error when have problem", %{config: config} do
     use_cassette("futures/account/get_position_error") do
-      assert ExHuobi.Futures.Rest.Account.get_positions("BTC", config) ==
+      assert AccountApi.get_positions("BTC", config) ==
                {:error,
                 %{
                   "err_code" => 403,

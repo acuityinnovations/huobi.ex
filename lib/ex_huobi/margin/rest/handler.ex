@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Rest.Handler do
+  @moduledoc false
+
   def parse_response({:ok, response}) do
     response.body
     |> Jason.decode()

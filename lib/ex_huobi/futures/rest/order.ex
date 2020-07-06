@@ -1,4 +1,6 @@
 defmodule ExHuobi.Futures.Rest.Order do
+  @moduledoc false
+
   alias ExHuobi.Futures.Rest.Handler
   alias ExHuobi.Rest.HTTPClient
 
