@@ -1,4 +1,6 @@
 defmodule ExHuobi.Config do
+  @moduledoc false
+
   require Logger
 
   @type t :: %ExHuobi.Config{

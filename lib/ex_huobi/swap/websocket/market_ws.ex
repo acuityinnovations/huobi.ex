@@ -1,15 +1,16 @@
-defmodule ExHuobi.Margin.WebSocket.OrderWs do
+defmodule ExHuobi.Swap.Websocket.MarketWs do
   @moduledoc false
 
   defmacro __using__(_opts) do
     quote do
-      @endpoint "wss://api.huobi.pro/ws/v1"
       use WebSockex
       require Logger
+      import Process, only: [send_after: 3]
+      @endpoint "wss://api.hbdm.com/swap-ws"
 
       def start_link(args \\ %{}) do
-        subscription = args[:subscribe] || ["orders.btcusdt.update"]
-        opts = consturct_opts(args)
+        subscription = args[:subscribe] || ["market.BTC-USD.depth.size_150.high_freq"]
+        opts = construct_opts(args)
 
         state =
           args
@@ -19,7 +20,7 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
         WebSockex.start_link(@endpoint, __MODULE__, state, opts)
       end
 
-      defp consturct_opts(args) do
+      defp construct_opts(args) do
         name = args[:name] || __MODULE__
 
         debug =
@@ -31,30 +32,21 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
         [name: name] ++ debug
       end
 
-      def authenticate(server, {config, endpoint}) do
-        message = ExHuobi.Util.get_authen_ws_message(config, @endpoint)
-        reply_op(server, message)
-      end
-
       def subscribe(server, topic) do
         message = %{
-          op: "sub",
-          topic: topic
+          sub: topic,
+          data_type: "incremental"
         }
 
         reply_op(server, message)
       end
 
-      def pong(server, ts) do
-        message = %{
-          op: "pong",
-          ts: ts
-        }
-
+      defp pong(server, ts) do
+        message = %{pong: ts}
         reply_op(server, message)
       end
 
-      def reply_op(server, msg) do
+      defp reply_op(server, msg) do
         json = Jason.encode!(msg)
         send(server, {:ws_reply, {:text, json}})
       end
@@ -62,14 +54,20 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
       @impl true
       def handle_connect(_conn, state) do
         Logger.info("Connected!")
-        send(self(), :authenticate)
+        send(self(), :subscribe)
         {:ok, state}
       end
 
       @impl true
-      def handle_info(:authenticate, state) do
-        config = Map.get(state, :config)
-        authenticate(self(), {config, @endpoint})
+      def handle_info({:pong, ts}, state) do
+        pong(self(), ts)
+        {:ok, state}
+      end
+
+      @impl true
+      def handle_info(:subscribe, state) do
+        topics = Map.get(state, :subscribe)
+        Enum.each(topics, &subscribe(self(), &1))
         {:ok, state}
       end
 
@@ -81,14 +79,10 @@ defmodule ExHuobi.Margin.WebSocket.OrderWs do
       @impl true
       def handle_frame({:binary, gzip_msg}, state) do
         msg = :zlib.gunzip(gzip_msg)
-        topics = Map.get(state, :subscribe)
 
         case Jason.decode(msg) do
-          {:ok, %{"op" => "auth", "err-code" => 0}} ->
-            Enum.each(topics, &subscribe(self(), &1))
-
-          {:ok, %{"op" => "ping", "ts" => ts}} ->
-            pong(self(), ts)
+          {:ok, %{"ping" => ts}} ->
+            send_after(self(), {:pong, ts}, 5_000)
 
           {:ok, payload} ->
             handle_response(payload, state)

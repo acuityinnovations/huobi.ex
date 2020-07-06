@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Rest.Order do
+  @moduledoc false
+
   alias ExHuobi.Margin.Order
   alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Rest.HTTPClient

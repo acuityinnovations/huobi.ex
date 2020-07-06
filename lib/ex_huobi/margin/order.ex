@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Order do
+  @moduledoc false
+
   @type t :: %__MODULE__{}
 
   defstruct ~w(

@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Account do
+  @moduledoc false
+
   @type t :: %__MODULE__{}
 
   defstruct ~w(

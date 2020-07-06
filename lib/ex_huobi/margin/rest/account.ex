@@ -1,4 +1,6 @@
 defmodule ExHuobi.Margin.Rest.Account do
+  @moduledoc false
+
   alias ExHuobi.Margin.Account, as: AccountModel
   alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Rest.HTTPClient

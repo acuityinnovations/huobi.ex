@@ -16,7 +16,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
       params = %{
         "account-id": 123_456_789,
         amount: 0.0001,
-        price: 11000,
+        price: 11_000,
         symbol: "btcusdt",
         type: "sell-limit",
         source: "super-margin-api"
@@ -33,7 +33,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         %{
           "account-id": 123_456_789,
           amount: 0.0001,
-          price: 11000,
+          price: 11_000,
           symbol: "btcusdt",
           type: "sell-limit",
           source: "super-margin-api"
@@ -41,7 +41,7 @@ defmodule ExHuobi.Rest.Orders.CreateTest do
         %{
           "account-id": 123_456_789,
           amount: 0.0001,
-          price: 11000,
+          price: 11_000,
           symbol: "btcusdt",
           type: "sell-limit",
           source: "super-margin-api"

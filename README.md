@@ -10,7 +10,7 @@ by adding `ex_huobi` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_huobi, "~> 0.2.1"}
+    {:ex_huobi, "~> 0.2.2"}
   ]
 end
 ```
@@ -19,18 +19,39 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/ex_huobi](https://hexdocs.pm/ex_huobi).
 
-
-## Margin Rest API Usage
-
+## Config
 ```elixir
 config = %{access_keys: ["XXX_HUOBI_API_KEY", "XXX_HUOBI_SECRET_KEY"]}
+```
 
-# Single API
+# Swap Rest API Usage
+## Single API
 
-# Get account info
+### Create a new order
+```elixir
+ExHuobi.Swap.Rest.Order.create_order(
+ %{ contract_code: "BTC-USD",
+   client_order_id: 92233720366,
+   volume: 1,
+   price: 8000,
+   direction: "Buy",
+   lever_rate: 5,
+   offset: "open",
+   order_price_type: "limit"
+}, config)
+```
+
+# Margin Rest API Usage
+
+## Single API
+
+### Get account info
+```elixir
 ExHuobi.Margin.Rest.Account.get(config)
+```
 
-# Create a new order
+### Create a new order
+```elixir
 ExHuobi.Margin.Rest.Order.create(
   %{
     "account-id": 12345678,
@@ -42,14 +63,16 @@ ExHuobi.Margin.Rest.Order.create(
   },
   config
 )
-
-# Cancel an order
+```
+### Cancel an order
+```elixir
 ExHuobi.Margin.Rest.Order.cancel(70662287304, config)
+```
 
+## Bulk API
 
-# Bulk API
-
-# Create multiple orders
+### Create multiple orders
+```elixir
 ExHuobi.Margin.Rest.Order.bulk_create(%{"orders-data" =>
   [
     %{"account-id": 12035991, amount: 0.001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"},
@@ -58,21 +81,27 @@ ExHuobi.Margin.Rest.Order.bulk_create(%{"orders-data" =>
   },
   config
 )
+```
 
-# Cancel multiple orders
+### Cancel multiple orders
+```elixir
 ExHuobi.Margin.Rest.Order.bulk_cancel(%{"order-ids": [70664141188, 70664141185]}, config)
 ```
 
-## Futures Exchange API
+### Futures Exchange API
 ```elixir
 config = %{access_keys: ["XXX_HUOBI_API_KEY", "XXX_HUOBI_SECRET_KEY"]}
 # Get account position
+```
 
+### Get futures positions
+```elixir
 symbol = "BTC|ETH..."
 ExHuobi.Futures.Rest.Account.get_position(symbol, config)
+```
 
-# Create new order
-
+### Create new order
+```elixir
 order = %{
         "contract_type" => "this_week",
         "direction" => "Buy",
@@ -84,9 +113,9 @@ order = %{
         "volume" => 1
       }
 ExHuobi.Futures.Rest.Order.create_order(order, config)
-
-# Create multiple orders
-
+```
+### Create multiple orders
+```elixir
 orders = [
       %{
         "contract_type" => "this_week",
@@ -110,11 +139,10 @@ orders = [
       },
     ]
 
-
 ExHuobi.Futures.Rest.Order.create_bulk_orders(orders, config)
-
-# Cancel order
-
+```
+### Cancel order
+```elixir
 order_id = 1234567890
 ExHuobi.Futures.Rest.Order.cancel_order(order_id, config)
 

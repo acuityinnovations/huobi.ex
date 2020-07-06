@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"BTC-USD\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_account_position_info?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-07-06T05%3A31%3A26&Signature=Iy1dC%2Fh1%2B6tAjaV5iGCl96foAMBYfTbthi3%2FkC2f4Ak%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC-USD\",\"margin_balance\":0.013985323262539496000000000000000000000000000000000000,\"margin_position\":0.002200607367633466,\"margin_frozen\":0E-18,\"margin_available\":0.011784715894906030,\"profit_real\":-0.000049989949908804,\"profit_unreal\":3.63212448300000000000000000000000000000000000000E-7,\"risk_rate\":6.315210596963200189,\"withdraw_available\":0.011784352682457730000000000000000000,\"liquidation_price\":4033.878157420537214598,\"lever_rate\":5,\"adjust_factor\":0.040000000000000000,\"margin_static\":0.013984960050091196,\"positions\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC-USD\",\"volume\":1.000000000000000000,\"available\":1.000000000000000000,\"frozen\":0E-18,\"cost_open\":9088.100000000000192304,\"cost_hold\":9088.100000000000192304,\"profit_unreal\":3.63212448300000000000000000000000000000000000000E-7,\"profit_rate\":0.000165045552572405,\"lever_rate\":5,\"position_margin\":0.002200607367633466,\"direction\":\"buy\",\"profit\":3.63212448300000000000000000000000000000000000000E-7,\"last_price\":9088.4}]}],\"ts\":1594013486922}",
+      "headers": {
+        "Date": "Mon, 06 Jul 2020 05:31:26 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dd14a72b226e87b723d6c1487eb0170411594013486; expires=Wed, 05-Aug-20 05:31:26 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Vary": "Accept-Encoding",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "22913c7cdc84445da8406757915425d0",
+        "ratelimit-remaining": "29",
+        "ratelimit-reset": "1594013489921",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "30",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "03c434a5c50000c6e0e725d200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5ae6f082d9c1c6e0-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

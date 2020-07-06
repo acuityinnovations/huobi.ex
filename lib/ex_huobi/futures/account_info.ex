@@ -1,4 +1,6 @@
 defmodule ExHuobi.Futures.AccountInfo do
+  @moduledoc false
+
   @type t :: %__MODULE__{}
 
   defstruct ~w(

@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"BTC-USD\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_account_info?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-07-06T05%3A29%3A53&Signature=PnsOO5UiaGnF9w%2FDgMwdhWkAdIYD0DB9y2rA5FcMVfI%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"margin_balance\":0.013984960050091196000000000000000000000000000000000000,\"margin_position\":0.002200680010123128,\"margin_frozen\":0E-18,\"margin_available\":0.011784280039968068,\"profit_real\":-0.000049989949908804,\"profit_unreal\":0E-54,\"risk_rate\":6.314835771561690052,\"withdraw_available\":0.011784280039968068000000000000000000000000000000000000,\"liquidation_price\":4033.878157420537214598,\"lever_rate\":5,\"adjust_factor\":0.040000000000000000,\"margin_static\":0.013984960050091196,\"contract_code\":\"BTC-USD\"}],\"ts\":1594013394466}",
+      "headers": {
+        "Date": "Mon, 06 Jul 2020 05:29:54 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "563",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d2c58a7ef4fdeb0fcac2f2a1a07a1b60b1594013394; expires=Wed, 05-Aug-20 05:29:54 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "0e387cda888647bdb08e967cce17fc71",
+        "ratelimit-remaining": "29",
+        "ratelimit-reset": "1594013397465",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "30",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "03c4333caa0000c70ce1b18200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5ae6ee411fabc70c-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

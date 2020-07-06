@@ -1,10 +1,8 @@
-defmodule ExHuobi.Futures.Rest.Account do
+defmodule ExHuobi.Swap.Rest.Account do
   @moduledoc false
 
-  alias ExHuobi.Futures.AccountInfo
-  alias ExHuobi.Futures.Rest.Handler
   alias ExHuobi.Rest.HTTPClient
-  alias ExHuobi.Util
+  alias ExHuobi.Swap.Rest.Handler
 
   @type config :: map
   @type position :: map
@@ -15,8 +13,8 @@ defmodule ExHuobi.Futures.Rest.Account do
   def get_positions(instrument_id, config) do
     @hbdm_host
     |> HTTPClient.post(
-      "/api/v1/contract_account_position_info",
-      %{"symbol" => instrument_id},
+      "/swap-api/v1/swap_account_position_info",
+      %{"contract_code" => instrument_id},
       config
     )
     |> Handler.parse_response()
@@ -26,11 +24,10 @@ defmodule ExHuobi.Futures.Rest.Account do
   def get_account_info(instrument_id, config) do
     @hbdm_host
     |> HTTPClient.post(
-      "/api/v1/contract_account_info",
-      %{"symbol" => instrument_id},
+      "/swap-api/v1/swap_account_info",
+      %{"contract_code" => instrument_id},
       config
     )
     |> Handler.parse_response()
-    |> Util.transform_response_data(AccountInfo)
   end
 end
