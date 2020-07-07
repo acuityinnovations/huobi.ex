@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"orders_data\":[{\"client_order_id\":92233720362,\"contract_code\":\"BTC-USD\",\"direction\":\"Buy\",\"lever_rate\":5,\"offset\":\"open\",\"order_price_type\":\"limit\",\"price\":9000,\"volume\":1},{\"client_order_id\":92233720364,\"contract_code\":\"BTC-USD\",\"direction\":\"Sell\",\"lever_rate\":5,\"offset\":\"open\",\"order_price_type\":\"limit\",\"price\":9600,\"volume\":1}]}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_batchorder?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-07-06T13%3A50%3A20&Signature=MaT96JGKTCn%2FtX%2FqHUr1xotVW128eQrwe32P3sZo%2BTk%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":{\"errors\":[],\"success\":[{\"order_id\":729816536205795328,\"client_order_id\":92233720362,\"index\":1,\"order_id_str\":\"729816536205795328\"},{\"order_id\":729816536230961152,\"client_order_id\":92233720364,\"index\":2,\"order_id_str\":\"729816536230961152\"}]},\"ts\":1594043421579}",
+      "headers": {
+        "Date": "Mon, 06 Jul 2020 13:50:21 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "283",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d6bac33bd136781c664db0a7b52b676fe1594043421; expires=Wed, 05-Aug-20 13:50:21 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "8427549c9bd1458ba3b05f978174d3da",
+        "ratelimit-remaining": "29",
+        "ratelimit-reset": "1594043424566",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "30",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "03c5fd69e30000c6d8491c0200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5ae9cb563c0cc6d8-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
