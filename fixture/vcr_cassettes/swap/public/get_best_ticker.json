@@ -1,0 +1,31 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-ex/market/detail/merged?contract_code=BTC-USD"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"ch\":\"market.BTC-USD.detail.merged\",\"status\":\"ok\",\"tick\":{\"amount\":\"216673.2394006582973334338854967581133363592\",\"ask\":[9185.1,23622],\"bid\":[9185,7669],\"close\":\"9185.1\",\"count\":202184,\"high\":\"9238\",\"id\":1594025476,\"low\":\"8906.8\",\"open\":\"9030.9\",\"ts\":1594025476916,\"vol\":\"19678582\"},\"ts\":1594025476916}",
+      "headers": {
+        "Date": "Mon, 06 Jul 2020 08:51:16 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "303",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d9248ea5ae9440a22b9afd7a507b43dc31594025476; expires=Wed, 05-Aug-20 08:51:16 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Accept-Language": "en-US",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "03c4eb9ae20000a9942bb98200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5ae8153e3fe2a994-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
