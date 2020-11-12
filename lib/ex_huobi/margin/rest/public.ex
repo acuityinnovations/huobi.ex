@@ -10,4 +10,9 @@ defmodule ExHuobi.Margin.Rest.Public do
     HTTPoison.get("#{@hbdm_host}/market/tickers")
     |> Handler.parse_response()
   end
+
+  def instruments() do
+    HTTPoison.get("#{@hbdm_host}/v1/common/symbols")
+    |> Handler.parse_response()
+  end
 end

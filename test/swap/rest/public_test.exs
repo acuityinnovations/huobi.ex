@@ -43,4 +43,22 @@ defmodule ExHuobi.Swap.Rest.Public.Test do
                 }}
     end
   end
+
+  test "get instruments info" do
+    use_cassette("/swap/public/instruments") do
+      assert PublicApi.instruments("BTC-USD") ==
+               {:ok,
+                [
+                  %{
+                    "contract_code" => "BTC-USD",
+                    "contract_size" => 100.0,
+                    "contract_status" => 1,
+                    "create_date" => "20200325",
+                    "price_tick" => 0.1,
+                    "settlement_date" => "1605168000000",
+                    "symbol" => "BTC"
+                  }
+                ]}
+    end
+  end
 end

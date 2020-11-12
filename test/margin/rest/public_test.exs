@@ -47,4 +47,17 @@ defmodule ExHuobi.Rest.PublicTest do
                 ]}
     end
   end
+
+  test "get instruments info" do
+    use_cassette "margin/public/instruments" do
+      {:ok, data} = Public.instruments()
+
+      symbol_info =
+        data
+        |> Enum.find(&(&1["symbol"] == "btcusdt"))
+
+      assert symbol_info["price-precision"] == 2
+      assert symbol_info["limit-order-min-order-amt"] == 0.0001
+    end
+  end
 end

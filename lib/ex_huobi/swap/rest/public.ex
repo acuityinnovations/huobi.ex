@@ -15,4 +15,9 @@ defmodule ExHuobi.Swap.Rest.Public do
     HTTPoison.get("#{@hbdm_host}/swap-ex/market/detail/merged?contract_code=#{instrument_id}")
     |> Handler.parse_response()
   end
+
+  def instruments(instrument_id) do
+    HTTPoison.get("#{@hbdm_host}/swap-api/v1/swap_contract_info?contract_code=#{instrument_id}")
+    |> Handler.parse_response()
+  end
 end
