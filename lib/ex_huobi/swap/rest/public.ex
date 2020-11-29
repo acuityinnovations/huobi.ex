@@ -20,4 +20,9 @@ defmodule ExHuobi.Swap.Rest.Public do
     HTTPoison.get("#{@hbdm_host}/swap-api/v1/swap_contract_info?contract_code=#{instrument_id}")
     |> Handler.parse_response()
   end
+
+  def get_index_price(instrument_id) do
+    HTTPoison.get("#{@hbdm_host}/swap-api/v1/swap_index?contract_code=#{instrument_id}")
+    |> Handler.parse_response()
+  end
 end

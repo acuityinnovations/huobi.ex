@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"client_order_id\":\"92233720368534\",\"contract_code\":\"BTC-USD\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_cancel?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-11-29T05%3A21%3A36&Signature=oA9fB5dWCdX20EqAlccNLFNIoFKzSPcZi%2FElurMJja8%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":{\"errors\":[{\"order_id\":\"92233720368534\",\"err_code\":1071,\"err_msg\":\"Repeated withdraw.\"}],\"successes\":\"\"},\"ts\":1606627297347}",
+      "headers": {
+        "Date": "Sun, 29 Nov 2020 05:21:37 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "146",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d3bb2a0ae7aa8319be243a9c9efe139521606627296; expires=Tue, 29-Dec-20 05:21:36 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "e05de4e4b0104745a9a1ae4d7ff3c662",
+        "ratelimit-remaining": "44",
+        "ratelimit-reset": "1606627300346",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "45",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "06b40c1ea50000c6f8432b9000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5f99e2dddf48c6f8-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"client_order_id\":\"9223372036853411\",\"contract_code\":\"BTC-USD\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_cancel?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2020-11-29T05%3A23%3A11&Signature=PPuwftyLKBYzEhK%2BMQMRYttYbj582rjyBYCxDSDikqE%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":{\"errors\":[{\"order_id\":\"9223372036853411\",\"err_code\":1061,\"err_msg\":\"This order doesnt exist.\"}],\"successes\":\"\"},\"ts\":1606627392217}",
+      "headers": {
+        "Date": "Sun, 29 Nov 2020 05:23:12 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "154",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dc43c5aedbaea677cefdb7926b27905041606627391; expires=Tue, 29-Dec-20 05:23:11 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "e6280bb9b33a48328bc99acb197c5cae",
+        "ratelimit-remaining": "44",
+        "ratelimit-reset": "1606627395217",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "45",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "06b40d91410000d058ab870000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5f99e52ecd92d058-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
