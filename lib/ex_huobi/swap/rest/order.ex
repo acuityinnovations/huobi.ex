@@ -16,15 +16,15 @@ defmodule ExHuobi.Swap.Rest.Order do
 
   Examples
 
-  iex> ExHuobi.Swap.Rest.Order.create_order(
+  ExHuobi.Swap.Rest.Order.create_order(
    %{contract_code: "BTC-USD",
-     client_order_id: 922337203685,
+     client_order_id: 912337313611,
      volume: 1,
-     price: 5000,
+     price: 1000,
      direction: "Buy",
      lever_rate: 5,
      offset: "open",
-     order_price_type: "limit"
+     order_price_type: "fok"
     }, nil)
 
   {:ok,
@@ -93,9 +93,9 @@ defmodule ExHuobi.Swap.Rest.Order do
   @doc """
   remove an order
   Examples:
-  ExHuobi.Swap.Rest.Order.remove_order(%{contract_code: "BTC-USD", order_id: 782591375958564865}, nil)
+  ExHuobi.Swap.Rest.Order.remove_order(%{contract_code: "BTC-USD", client_order_id: 922337203611}, nil)
 
-  {:ok, %{"errors" => [], "successes" => "782591375958564865"}}
+  {:ok, %{"errors" => [], "successes" => "922337203611"}}
   """
   def remove_order(order, config) do
     @hbdm_host

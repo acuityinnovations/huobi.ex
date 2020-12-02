@@ -9,24 +9,27 @@ defmodule ExHuobi.Futures.Rest.Order do
 
   @hbdm_host "https://api.hbdm.com"
 
-  # @doc """
-  # Place order in the huobi futures exchanges
+  @doc """
+  Place order in the huobi futures exchanges
 
-  # https://huobiapi.github.io/docs/dm/v1/en/#place-an-order
+  https://huobiapi.github.io/docs/dm/v1/en/#place-an-order
 
-  # ## Examples
+  Examples
 
-  # iex> ExHuobi.Futures.Rest.Order.create_order(
-  #   %{ symbol: "BTC",
-  #     contract_type: "this_week",
-  #     volume: 1,
-  #     price: 5000,
-  #     direction: "Buy",
-  #     lever_rate: 5,
-  #     offset: "open",
-  #     order_price_type: "limit"
-  #   })
-  # """
+  ExHuobi.Futures.Rest.Order.create_order(
+   %{ symbol: "BTC",
+     contract_type: "this_week",
+     volume: 1,
+     price: 15000,
+     direction: "Buy",
+     lever_rate: 5,
+     offset: "open",
+     order_price_type: "limit"
+   }, nil)
+
+   {:ok,
+    %{"order_id" => 783722440915513344, "order_id_str" => "783722440915513344"}}
+  """
   @spec create_order(map, config) :: {:ok, map} | {:error, any}
   def create_order(order, config) do
     @hbdm_host
@@ -34,34 +37,51 @@ defmodule ExHuobi.Futures.Rest.Order do
     |> Handler.parse_response()
   end
 
-  # @doc """
-  # Place order in the huobi futures exchanges
+  @doc """
+  Place order in the huobi futures exchanges
+  https://huobiapi.github.io/docs/dm/v1/en/#place-a-batch-of-orders
 
-  # https://huobiapi.github.io/docs/dm/v1/en/#place-a-batch-of-orders
+  Examples:
 
-  # ## Examples
+  ExHuobi.Futures.Rest.Order.create_bulk_orders(%{"orders_data" => [
+     %{ symbol: "BTC",
+       contract_type: "this_week",
+       volume: 1,
+       price: 15000,
+       direction: "Buy",
+       lever_rate: 5,
+       offset: "open",
+       order_price_type: "limit"
+     },
+     %{ symbol: "BTC",
+       contract_type: "this_week",
+       volume: 10,
+       price: 15000,
+       direction: "Buy",
+       lever_rate: 5,
+       offset: "open",
+       order_price_type: "limit"
+     }
+  ]}, nil)
 
-  # iex> ExHuobi.Futures.Rest.Order.create_bulk_orders(%{"orders_data" => [
-  #   { symbol: "BTC",
-  #     contract_type: "this_week",
-  #     volume: 1,
-  #     price: 5000,
-  #     direction: "Buy",
-  #     lever_rate: 5,
-  #     offset: "open",
-  #     order_price_type: "limit"
-  #   },
-  #   { symbol: "BTC",
-  #     contract_type: "this_week",
-  #     volume: 1,
-  #     price: 5000,
-  #     direction: "Buy",
-  #     lever_rate: 5,
-  #     offset: "open",
-  #     order_price_type: "limit"
-  #   }
-  # ])
-  # """
+  {:ok,
+   %{
+     "errors" => [
+        %{
+          "err_code" => 1047,
+          "err_msg" => "Insufficient margin available.",
+          "index" => 2
+        }
+      ],
+     "success" => [
+       %{
+         "index" => 1,
+         "order_id" => 783722101650739200,
+         "order_id_str" => "783722101650739200"
+       }
+     ]
+   }}
+  """
   @spec create_bulk_orders(map, config) :: {:ok, list} | {:error, any}
   def create_bulk_orders(orders, config) do
     @hbdm_host

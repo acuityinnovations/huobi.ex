@@ -8,9 +8,6 @@ defmodule ExHuobi.Margin.Rest.Handler do
       {:ok, %{"status" => "error", "err-code" => err_code, "err-msg" => err_msg}} ->
         {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
 
-      {:ok, %{"status" => "ok", "data" => [%{"err-code" => err_code, "err-msg" => err_msg}, _]}} ->
-        {:error, {:huobi_error, %{code: err_code, msg: err_msg}}}
-
       {:ok, %{"status" => "ok", "data" => data}} ->
         {:ok, data}
 
