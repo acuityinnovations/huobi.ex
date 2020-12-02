@@ -54,6 +54,8 @@ defmodule ExHuobi.Margin.Rest.Order do
       source: "super-margin-api"
     },
     config)
+
+  {:ok, "158599112243250"}
   """
   @spec create(params, config) :: response
   def create(params, config) do
@@ -66,10 +68,16 @@ defmodule ExHuobi.Margin.Rest.Order do
   Bulk create orders.
   ## Examples
 
-    iex> ExHuobi.Margin.Rest.Order.bulk_create([
-      %{"account-id": 12035991, amount: 0.001, price: 11000 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"},
-      %{"account-id": 12035991, amount: 0.001, price: 11500 , symbol: "btcusdt", type: "sell-limit", source: "super-margin-api"}
-    ], config)
+  ExHuobi.Margin.Rest.Order.bulk_create([
+    %{"account-id": 12035991, amount: 100, price: 11000 , symbol: "btcusdt", type: "buy-limit", source: "super-margin-api"},
+    %{"account-id": 12035991, amount: 0.001, price: 11500 , symbol: "btcusdt", type: "buy-limit", source: "super-margin-api"}
+  ], config)
+
+  {:ok,
+   [
+     %{"client-order-id" => "", "order-id" => 159199275270793},
+     %{"client-order-id" => "", "order-id" => 159199275270794}
+   ]}
   """
   @spec bulk_create(params, config) :: response
   def bulk_create(params, config) do
