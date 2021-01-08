@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"BTC-USDT\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/linear-swap-api/v1/swap_cross_position_info?AccessKeyId=b3bb7894-95ff9a84-mn8ikls4qg-76e33&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2021-01-07T07%3A40%3A38&Signature=YdV4EnRB%2FuyF160LD8PNm6wfXFtbXflBq0JLEM4L2XY%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC-USDT\",\"volume\":1.000000000000000000,\"available\":1.000000000000000000,\"frozen\":0E-18,\"cost_open\":37113.800000000000000000,\"cost_hold\":37113.800000000000000000,\"profit_unreal\":-0.014100000000000000,\"profit_rate\":-0.001899562965797090,\"lever_rate\":5,\"position_margin\":7.419940000000000000,\"direction\":\"buy\",\"profit\":-0.014100000000000000,\"last_price\":37099.7,\"margin_asset\":\"USDT\",\"margin_mode\":\"cross\",\"margin_account\":\"USDT\"}],\"ts\":1610005238512}",
+      "headers": {
+        "Date": "Thu, 07 Jan 2021 07:40:38 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "505",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d74223f67230a2d4498b1e186bc1635b41610005238; expires=Sat, 06-Feb-21 07:40:38 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "0be176c5e821492b95693279a6e898b1",
+        "ratelimit-remaining": "44",
+        "ratelimit-reset": "1610005241512",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "45",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "077d636aae0000c354138d8000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "60dc08244e48c354-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

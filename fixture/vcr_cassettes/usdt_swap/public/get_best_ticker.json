@@ -1,0 +1,31 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/linear-swap-ex/market/detail/merged?contract_code=BTC-USDT"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"ch\":\"market.BTC-USDT.detail.merged\",\"status\":\"ok\",\"tick\":{\"amount\":\"378391.442\",\"ask\":[36956.8,14974],\"bid\":[36956.7,1],\"close\":\"36956.7\",\"count\":1136452,\"high\":\"37762.3\",\"id\":1610006003,\"low\":\"34279.9\",\"open\":\"34590.3\",\"trade_turnover\":\"13475374208.0956\",\"ts\":1610006003496,\"vol\":\"378391442\"},\"ts\":1610006003496}",
+      "headers": {
+        "Date": "Thu, 07 Jan 2021 07:53:23 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "315",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d43ebb2898e12172709a9c16861358b661610006003; expires=Sat, 06-Feb-21 07:53:23 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Accept-Language": "en-US",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "077d6f16ea000001d12501a000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "60dc1ad17f8001d1-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
