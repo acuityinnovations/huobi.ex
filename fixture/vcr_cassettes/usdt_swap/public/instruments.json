@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/linear-swap-api/v1/swap_contract_info?contract_code=BTC-USDT"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC-USDT\",\"contract_size\":0.001000000000000000,\"price_tick\":0.100000000000000000,\"create_date\":\"20201021\",\"contract_status\":1,\"settlement_date\":\"1610006400000\",\"support_margin_mode\":\"all\"}],\"ts\":1610005819254}",
+      "headers": {
+        "Date": "Thu, 07 Jan 2021 07:50:19 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "265",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d3946bdf85333c7d71b5625dfd38cedb21610005819; expires=Sat, 06-Feb-21 07:50:19 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "ebc87d4940174ca38bc9eb1fe6f0823b",
+        "ratelimit-remaining": "119",
+        "ratelimit-reset": "1610005822254",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "120",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "077d6c474200001730ef959000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "60dc165209421730-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

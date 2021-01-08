@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"USDT\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/linear-swap-api/v1/swap_cross_account_info?AccessKeyId=b3bb7894-95ff9a84-mn8ikls4qg-76e33&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2021-01-07T07%3A37%3A20&Signature=vYDN6ZWeZ1W4C5Vg67h2qcILHeRdGUg2M%2BkdrYcgvJk%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":[{\"margin_mode\":\"cross\",\"margin_account\":\"USDT\",\"margin_asset\":\"USDT\",\"margin_balance\":55.252864420000000000,\"margin_static\":55.366064420000000000,\"margin_position\":7.400120000000000000,\"margin_frozen\":0E-18,\"profit_real\":-0.007422760000000000,\"profit_unreal\":-0.113200000000000000,\"withdraw_available\":47.85274442,\"risk_rate\":185.662055547747874358,\"contract_detail\":[{\"symbol\":\"BTC\",\"contract_code\":\"BTC-USDT\",\"margin_position\":7.400120000000000000,\"margin_frozen\":0E-18,\"margin_available\":47.852744420000000000,\"profit_unreal\":-0.113200000000000000,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.040000000000000000},{\"symbol\":\"ETH\",\"contract_code\":\"ETH-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.060000000000000000},{\"symbol\":\"XRP\",\"contract_code\":\"XRP-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.075000000000000000},{\"symbol\":\"LTC\",\"contract_code\":\"LTC-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.060000000000000000},{\"symbol\":\"LINK\",\"contract_code\":\"LINK-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"TRX\",\"contract_code\":\"TRX-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"DOT\",\"contract_code\":\"DOT-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"ADA\",\"contract_code\":\"ADA-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"EOS\",\"contract_code\":\"EOS-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.060000000000000000},{\"symbol\":\"BCH\",\"contract_code\":\"BCH-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.060000000000000000},{\"symbol\":\"BSV\",\"contract_code\":\"BSV-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"YFI\",\"contract_code\":\"YFI-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000},{\"symbol\":\"UNI\",\"contract_code\":\"UNI-USDT\",\"margin_position\":0,\"margin_frozen\":0,\"margin_available\":47.852744420000000000,\"profit_unreal\":0E-18,\"liquidation_price\":null,\"lever_rate\":5,\"adjust_factor\":0.100000000000000000}]}],\"ts\":1610005041165}",
+      "headers": {
+        "Date": "Thu, 07 Jan 2021 07:37:21 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d8a3e8f59d9c36e54bd609a15460038121610005041; expires=Sat, 06-Feb-21 07:37:21 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Vary": "Accept-Encoding",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "823016d99405438a9b7ff33e55c2013a",
+        "ratelimit-remaining": "44",
+        "ratelimit-reset": "1610005044162",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "45",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "077d6067bd0000dceabeb99000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "60dc0352cfabdcea-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
