@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.huobi.pro/v1/order/orders/batchCancelOpenOrders?AccessKeyId=28fe9698-41f58110-ghxertfvbf-91ac3&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2021-02-03T10%3A44%3A49&Signature=1Mmpj%2BsQuSnlkZ2vObfDtc3I0weWjIofTcCbM8J3bdg%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":{\"success-count\":0,\"failed-count\":0,\"next-id\":-1}}",
+      "headers": {
+        "Date": "Wed, 03 Feb 2021 10:44:49 GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dc71d325723eb27cdf3056ac192a68d3a1612349089; expires=Fri, 05-Mar-21 10:44:49 GMT; path=/; domain=.huobi.pro; HttpOnly; SameSite=Lax; Secure",
+        "Vary": "Accept-Encoding",
+        "X-HB-RateLimit-Requests-Remain": "49",
+        "X-HB-RateLimit-Requests-Expire": "1612349091811",
+        "X-Application-Context": "mulan-broker-pro:default,prd:8080",
+        "Request-Id": "b886a446ae3ede5c3a73b7e7386d553a",
+        "X-Request-ID": "d97b1d2d7bd3aa2d03cdf410f5b713eb",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "080917bfd70000d1d31c36b000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "61bb8f12fdebd1d3-HKG"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

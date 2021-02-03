@@ -25,4 +25,13 @@ defmodule ExHuobi.Rest.Orders.CancelTest do
       assert length(data["success"]) == 2
     end
   end
+
+  test "cancel open order batch", %{config: config} do
+    use_cassette "rest/orders/batch_cancel_open_orders" do
+      params = %{}
+
+      {:ok, data} = Rest.cancel_all(params, config)
+      assert data["success-count"] == 0
+    end
+  end
 end
