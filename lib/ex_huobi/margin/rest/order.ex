@@ -103,6 +103,16 @@ defmodule ExHuobi.Margin.Rest.Order do
     |> Handler.parse_response()
   end
 
+  def cancel_all(params, config) do
+    @margin_endpoint
+    |> HTTPClient.post(
+      "/v1/order/orders/batchCancelOpenOrders",
+      params,
+      config
+    )
+    |> Handler.parse_response()
+  end
+
   @doc """
   Bulk cancel order.
   ## Examples
