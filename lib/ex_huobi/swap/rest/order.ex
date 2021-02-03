@@ -104,6 +104,17 @@ defmodule ExHuobi.Swap.Rest.Order do
   end
 
   @doc """
+  remove all open orders
+  Examples:
+  ExHuobi.Swap.Rest.Order.cancel_all_orders(%{contract_code: "BTC-USD"}, nil)
+  """
+  def cancel_all_orders(params, config) do
+    @hbdm_host
+    |> HTTPClient.post("/swap-api/v1/swap_cancelall", params, config)
+    |> Handler.parse_response()
+  end
+
+  @doc """
   ExHuobi.Swap.Rest.Order.get_open_orders("BTC-USD", nil)
 
   {:ok,

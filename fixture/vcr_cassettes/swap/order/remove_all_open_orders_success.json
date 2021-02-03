@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"BTC-USD\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/swap-api/v1/swap_cancelall?AccessKeyId=28fe9698-41f58110-ghxertfvbf-91ac3&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2021-02-03T14%3A17%3A13&Signature=Kb99m6rxFILGOt4%2BGsMVu9qKu%2F97%2Bk%2FZNX7HZCK%2BjrI%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"error\",\"err_code\":1051,\"err_msg\":\"No orders to cancel.\",\"ts\":1612361834309}",
+      "headers": {
+        "Date": "Wed, 03 Feb 2021 14:17:14 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "86",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d8b0f0d90be017ba9790db1a22e23cf461612361834; expires=Fri, 05-Mar-21 14:17:14 GMT; path=/; domain=.hbdm.com; HttpOnly; SameSite=Lax",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "ce284271edcf4dbc8b2e33b80345b4e0",
+        "ratelimit-remaining": "35",
+        "ratelimit-reset": "1612361837309",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "36",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "0809da36fa0000c38b19129000000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "61bcc637fd20c38b-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
