@@ -11,6 +11,13 @@ defmodule ExHuobi.Margin.Rest.Public do
     |> Handler.parse_response()
   end
 
+  def get_last_trade(instrument_id) do
+    instrument_id = String.downcase(instrument_id)
+
+    HTTPoison.get("#{@hbdm_host}/market/trade?symbol=#{instrument_id}")
+    |> Handler.parse_response()
+  end
+
   def instruments() do
     HTTPoison.get("#{@hbdm_host}/v1/common/symbols")
     |> Handler.parse_response()
