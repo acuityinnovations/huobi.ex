@@ -11,6 +11,9 @@ defmodule ExHuobi.Margin.Rest.Handler do
       {:ok, %{"status" => "ok", "data" => data}} ->
         {:ok, data}
 
+      {:ok, %{"status" => "ok", "tick" => %{"data" => data}}} ->
+        {:ok, data}
+
       {:error, error} ->
         {:error, {:poison_decode_error, error}}
     end

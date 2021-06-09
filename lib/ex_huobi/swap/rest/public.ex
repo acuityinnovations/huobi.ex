@@ -21,6 +21,13 @@ defmodule ExHuobi.Swap.Rest.Public do
     |> Handler.parse_response()
   end
 
+  def get_last_trade(instrument_id) do
+    instrument_id = String.downcase(instrument_id)
+
+    HTTPoison.get("#{@hbdm_host}/swap-ex/market/trade?contract_code=#{instrument_id}")
+    |> Handler.parse_response()
+  end
+
   def get_index_price(instrument_id) do
     HTTPoison.get("#{@hbdm_host}/swap-api/v1/swap_index?contract_code=#{instrument_id}")
     |> Handler.parse_response()
