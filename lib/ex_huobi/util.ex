@@ -55,7 +55,8 @@ defmodule ExHuobi.Util do
   end
 
   def sign_content_for_ws(key, content) do
-    :crypto.hmac(
+    :crypto.mac(
+      :hmac,
       :sha256,
       key,
       content
@@ -64,7 +65,8 @@ defmodule ExHuobi.Util do
   end
 
   def sign_content_for_rest(key, content) do
-    :crypto.hmac(
+    :crypto.mac(
+      :hmac,
       :sha256,
       key,
       content
