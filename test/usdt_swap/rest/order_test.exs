@@ -188,4 +188,15 @@ defmodule ExHuobi.UsdtSwap.Rest.Order.Test do
                 }}
     end
   end
+
+  test "remove all cross order success", %{config: config} do
+    use_cassette("/usdt_swap/order/cancel_all_cross_orders") do
+      order = %{
+        contract_code: "BTC-USDT"
+      }
+
+      assert OrderApi.cancel_all_cross_orders(order, config) ==
+               {:ok, %{"errors" => [], "successes" => "870285458012192768"}}
+    end
+  end
 end
