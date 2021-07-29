@@ -17,7 +17,7 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
   Examples
 
   ExHuobi.UsdtSwap.Rest.Order.create_cross_order(
-   %{contract_code: "BTC-USD",
+   %{contract_code: "BTC-USDT",
      client_order_id: 912337313611,
      volume: 1,
      price: 1000,
@@ -46,7 +46,7 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
   Examples:
 
   ExHuobi.UsdtSwap.Rest.Order.create_bulk_cross_orders(%{"orders_data" => [
-   %{ contract_code: "BTC-USD",
+   %{ contract_code: "BTC-USDT",
      client_order_id: "9223372031",
      volume: 1,
      price: 9000,
@@ -55,7 +55,7 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
      offset: "open",
      order_price_type: "limit"
    },
-   %{ contract_code: "BTC-USD",
+   %{ contract_code: "BTC-USDT",
      client_order_id: "9223372032",
      volume: 1,
      price: 9600,
@@ -93,7 +93,7 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
   @doc """
   remove an order
   Examples:
-  ExHuobi.UsdtSwap.Rest.Order.remove_cross_order(%{contract_code: "BTC-USD", client_order_id: 922337203611}, nil)
+  ExHuobi.UsdtSwap.Rest.Order.remove_cross_order(%{contract_code: "BTC-USDT", client_order_id: 922337203611}, nil)
 
   {:ok, %{"errors" => [], "successes" => "922337203611"}}
   """
@@ -104,7 +104,18 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
   end
 
   @doc """
-  ExHuobi.UsdtSwap.Rest.Order.get_open_cross_orders("BTC-USD", nil)
+  remove all open orders
+  Examples:
+  ExHuobi.UsdtSwap.Rest.cancel_all_cross_orders(%{contract_code: "BTC-USDT"}, nil)
+  """
+  def cancel_all_cross_orders(params, config) do
+    @hbdm_host
+    |> HTTPClient.post("/linear-swap-api/v1/swap_cross_cancelall", params, config)
+    |> Handler.parse_response()
+  end
+
+  @doc """
+  ExHuobi.UsdtSwap.Rest.Order.get_open_cross_orders("BTC-USDT", nil)
 
   {:ok,
    %{
@@ -113,7 +124,7 @@ defmodule ExHuobi.UsdtSwap.Rest.Order do
        %{
          "canceled_at" => nil,
          "client_order_id" => 92233720368512,
-         "contract_code" => "BTC-USD",
+         "contract_code" => "BTC-USDT",
          "created_at" => 1606626246006,
          "direction" => "buy",
          "fee" => 0,

@@ -49,7 +49,13 @@ defmodule ExHuobi.Swap.Rest.Order.Test do
   test "remove all open orders success", %{config: config} do
     use_cassette("/swap/order/remove_all_open_orders_success") do
       assert OrderApi.cancel_all_orders(%{contract_code: "BTC-USD"}, config) ==
-               {:error, %{"err_code" => 1051, "err_msg" => "No orders to cancel.", "status" => "error", "ts" => 1612361834309}}
+               {:error,
+                %{
+                  "err_code" => 1051,
+                  "err_msg" => "No orders to cancel.",
+                  "status" => "error",
+                  "ts" => 1_612_361_834_309
+                }}
     end
   end
 

@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"contract_code\":\"BTC-USDT\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.hbdm.com/linear-swap-api/v1/swap_cross_cancelall?AccessKeyId=1qdmpe4rty-01668a30-41b448c7-7d15a&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2021-07-29T04%3A43%3A45&Signature=kQ%2FsfV%2FoailY2DXK9hRT%2B67hJtSkSW2B%2FcgVaW5a1Kc%3D"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"ok\",\"data\":{\"errors\":[],\"successes\":\"870285458012192768\"},\"ts\":1627533826562}",
+      "headers": {
+        "Date": "Thu, 29 Jul 2021 04:43:46 GMT",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Length": "88",
+        "Connection": "keep-alive",
+        "Pragma": "no-cache",
+        "Cache-Control": "no-cache, no-store",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "ReqId": "d9f14d5a2f05c3583a7941531c6522c3",
+        "ratelimit-remaining": "35",
+        "ratelimit-reset": "1627533829560",
+        "ratelimit-interval": "3000",
+        "ratelimit-limit": "36",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "6763b02c5e26c6dc-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
