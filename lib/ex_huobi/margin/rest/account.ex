@@ -2,6 +2,7 @@ defmodule ExHuobi.Margin.Rest.Account do
   @moduledoc false
 
   alias ExHuobi.Margin.Account, as: AccountModel
+  alias ExHuobi.Margin.Balance
   alias ExHuobi.Margin.Rest.Handler
   alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Util
@@ -22,5 +23,13 @@ defmodule ExHuobi.Margin.Rest.Account do
     |> HTTPClient.get("/v1/account/accounts", config)
     |> Handler.parse_response()
     |> Util.transform_response_data(AccountModel)
+  end
+
+  @spec get_balances(integer, config) :: response
+  def get_balances(account_id, config) do
+    @margin_endpoint
+    |> HTTPClient.get("/v1/account/accounts/#{account_id}/balance", config)
+    |> Handler.parse_response()
+    |> Util.transform_response_data(Balance)
   end
 end
