@@ -3,6 +3,7 @@ defmodule ExHuobi.Futures.Rest.Account do
 
   alias ExHuobi.Futures.AccountInfo
   alias ExHuobi.Futures.Rest.Handler
+  alias ExHuobi.Futures.Position
   alias ExHuobi.Rest.HTTPClient
   alias ExHuobi.Util
 
@@ -30,6 +31,22 @@ defmodule ExHuobi.Futures.Rest.Account do
       %{"symbol" => instrument_id},
       config
     )
+    |> Handler.parse_response()
+    |> Util.transform_response_data(AccountInfo)
+  end
+
+  @spec get_all_positions(config) :: {:error, any} | {:ok, any}
+  def get_all_positions(config) do
+    @hbdm_host
+    |> HTTPClient.post("/api/v1/contract_position_info", %{}, config)
+    |> Handler.parse_response()
+    |> Util.transform_response_data(Position)
+  end
+
+  @spec get_all_accounts(config) :: {:error, any} | {:ok, any}
+  def get_all_accounts(config) do
+    @hbdm_host
+    |> HTTPClient.post("/api/v1/contract_account_info", %{}, config)
     |> Handler.parse_response()
     |> Util.transform_response_data(AccountInfo)
   end

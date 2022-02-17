@@ -30,4 +30,18 @@ defmodule ExHuobi.Swap.Rest.Account do
     )
     |> Handler.parse_response()
   end
+
+  @spec get_all_positions(config) :: {:error, any} | {:ok, any}
+  def get_all_positions(config) do
+    @hbdm_host
+    |> HTTPClient.post("/swap-api/v1/swap_position_info", %{}, config)
+    |> Handler.parse_response()
+  end
+
+  @spec get_all_accounts(config) :: {:error, any} | {:ok, any}
+  def get_all_accounts(config) do
+    @hbdm_host
+    |> HTTPClient.post("/swap-api/v1/swap_account_info", %{}, config)
+    |> Handler.parse_response()
+  end
 end
