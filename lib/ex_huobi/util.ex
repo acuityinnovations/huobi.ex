@@ -55,22 +55,29 @@ defmodule ExHuobi.Util do
   end
 
   def sign_content_for_ws(key, content) do
-    :crypto.hmac(
-      :sha256,
-      key,
-      content
-    )
-    |> Base.encode64()
+    if Code.ensure_loaded?(:crypto) and function_exported?(:crypto, :mac, 4) do
+      :hmac
+      |> :crypto.mac(:sha256, key, content)
+      |> Base.encode16()
+    else
+      :sha256
+      |> :crypto.hmac(key, content)
+      |> Base.encode16()
+    end
   end
 
   def sign_content_for_rest(key, content) do
-    :crypto.hmac(
-      :sha256,
-      key,
-      content
-    )
-    |> Base.encode64()
-    |> URI.encode_www_form()
+    if Code.ensure_loaded?(:crypto) and function_exported?(:crypto, :mac, 4) do
+      :hmac
+      |> :crypto.mac(:sha256, key, content)
+      |> Base.encode16()
+      |> URI.encode_www_form()
+    else
+      :sha256
+      |> :crypto.hmac(key, content)
+      |> Base.encode16()
+      |> URI.encode_www_form()
+    end
   end
 
   def get_authen_ws_message(config, endpoint, is_future? \\ false) do
