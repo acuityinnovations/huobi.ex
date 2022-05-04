@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :huobi,
   api_key: "",
